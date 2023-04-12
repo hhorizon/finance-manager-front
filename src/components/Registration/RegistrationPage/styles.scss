@@ -1,0 +1,65 @@
+.registration-page {
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0 48px;
+  }
+
+  @media (min-width: 1280px) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0;
+  }
+
+  &__image-wrapper {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: flex;
+      align-items: center;
+      height: 250px;
+      margin-bottom: 50px;
+    }
+
+    @media (min-width: 1280px) {
+      flex-direction: column;
+      height: 413px;
+    }
+  }
+
+  &__image {
+    @media (min-width: 768px) {
+      height: 250px;
+      margin-right: 60px;
+    }
+
+    @media (min-width: 1280px) {
+      height: 413px;
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__title {
+    font-family: var(--secondary-font);
+    font-size: 30px;
+    line-height: 45px;
+  }
+
+  &__form-wrapper {
+    display: flex;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      width: 533px;
+    }
+
+    @media (min-width: 1280px) {
+      height: 100vh;
+      padding: 0 100px;
+      background-color: var(--secondary-background-color);
+      backdrop-filter: blur(50px);
+    }
+  }
+}

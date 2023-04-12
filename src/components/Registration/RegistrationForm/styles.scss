@@ -1,0 +1,89 @@
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px 20px 65px;
+  background-color: var(--white-background-color);
+  border-radius: 20px;
+
+  @media (min-width: 480px) {
+    padding: 40px 65px 65px;
+  }
+
+  &__logo-box {
+    margin: 0 auto;
+    margin-bottom: 60px;
+  }
+
+  &__field-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--placeholder-secondary-color);
+  }
+
+  &__field-input {
+    margin-left: 55px;
+    padding: 0;
+    font-size: 18px;
+    line-height: 27px;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      color: var(--placeholder-main-color);
+    }
+  }
+
+  &__field-icon {
+    position: absolute;
+    left: 15px;
+  }
+
+  &__password-icon {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    fill: var(--placeholder-third-color);
+    transition: var(--main-transaction);
+    cursor: pointer;
+
+    &:hover {
+      fill: var(--main-text-color);
+    }
+  }
+
+  &__field-error {
+    position: absolute;
+    bottom: -18px;
+    font-size: 12px;
+    color: var(--error-text-color);
+  }
+
+  &__button {
+    width: 300px;
+    height: 50px;
+    padding: 0;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+}
+
+.main-button {
+  margin-bottom: 20px;
+  color: var(--secondary-text-color);
+  background-color: var(--green-color);
+  border: none;
+}
+
+.secondary-button {
+  color: var(--third-text-color);
+  background-color: var(--white-background-color);
+  border: 1px solid var(--third-text-color);
+}
