@@ -1,0 +1,20 @@
+.balance {
+  padding: 10px 40px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--white-background-color);
+  border-radius: 30px;
+
+  &__title {
+    font-size: 12px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: var(--placeholder-third-color);
+  }
+
+  &__quantity {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+  }
+}

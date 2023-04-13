@@ -4,6 +4,7 @@
   --secondary-color: #6e78e8;
   --green-color: #24cca7;
   --red-color: #ff6596;
+  --main-transparent-color: #4a56e280;
 
   // bg colors
   --main-background-color: #e7eaf2;
@@ -31,10 +32,10 @@
   --tablet: 768px;
   --desktop: 1280px;
 
-  //  transaction
-  --main-transaction: all 250ms ease;
+  //  transition
+  --main-transition: all 250ms ease;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 768px) {
   //
 }
