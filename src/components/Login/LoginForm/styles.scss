@@ -4,10 +4,10 @@
   width: 100%;
   padding: 40px 20px 65px;
   background-color: var(--white-background-color);
-  border-radius: 20px;
 
   @media (min-width: 480px) {
     padding: 40px 65px 65px;
+    border-radius: 20px;
   }
 
   &__logo-box {
