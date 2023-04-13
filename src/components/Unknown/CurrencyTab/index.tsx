@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { getCurrency } from "../../../services/common/privateBankService";
-import { PrivateBankCurrency } from "../../../types";
+// import { getCurrency } from "../../../services/common/privateBankService";
+// import { PrivateBankCurrency } from "../../../types";
 import "./styles.scss";
 
 import { testData } from "./testData";
 
 const CurrencyTab: React.FC = () => {
-  const [currency, setCurrensy] = useState<PrivateBankCurrency[] | null>(null);
+  // const [currency, setCurrensy] = useState<PrivateBankCurrency[] | null>(null);
 
   // useEffect(() => {
   //   getCurrency()

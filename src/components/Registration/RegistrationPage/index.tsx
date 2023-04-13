@@ -5,12 +5,22 @@ import RegistrationForm from "../RegistrationForm";
 import registretionImage from "../../../assets/img/registretion-page-img.png";
 
 import { RegistrationFormValues } from "../RegistrationForm/validation";
+import { useAppDispatch } from "../../../redux/hooks";
+import { signUp } from "../../../redux/auth/auth-operations";
 import "./styles.scss";
 
 const RegistrationPage: React.FC = () => {
-  const onRegistrationSubmit = (values: RegistrationFormValues) => {
-    // TODO send credentials
-    console.log(values);
+  const dispatch = useAppDispatch();
+
+  const onSubmit = async (values: RegistrationFormValues) => {
+    const { email, password, name } = values;
+
+    try {
+      dispatch(signUp({ email, password, name }));
+    } catch (error) {
+      // TODO add notification
+      console.log(error);
+    }
   };
 
   return (
@@ -27,7 +37,7 @@ const RegistrationPage: React.FC = () => {
         </div>
 
         <div className="registration-page__form-wrapper">
-          <RegistrationForm onSubmit={onRegistrationSubmit} />
+          <RegistrationForm onSubmit={onSubmit} />
         </div>
       </div>
     </Container>
