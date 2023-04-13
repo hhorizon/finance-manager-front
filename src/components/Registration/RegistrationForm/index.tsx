@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
+import PasswordStrengthEstimator from "../../Unknown/PasswordStrengthEstimator";
 import Logo from "../../Unknown/Logo";
 import { EyeIcon, EmailIcon, LockIcon, AccountIcon } from "../../../icons";
 
@@ -14,6 +15,7 @@ interface RegistrationFormProps {
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const initialValues: RegistrationFormValues = {
@@ -36,95 +38,110 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
         actions.setSubmitting(false);
       }}
     >
-      <Form className="sign-up-form">
-        <div className="sign-up-form__logo-box">
+      <Form className="registration-form">
+        <div className="registration-form__logo-box">
           <Logo />
         </div>
 
-        <div className="sign-up-form__field-box">
-          <EmailIcon className="sign-up-form__field-icon" />
+        <div className="registration-form__field">
+          <EmailIcon className="registration-form__field__icon" />
 
           <Field
             type="email"
             name="email"
             placeholder="E-mail"
-            className="sign-up-form__field-input"
+            className="registration-form__field__input"
           />
 
           <ErrorMessage
             name="email"
             render={(errorMes) => (
-              <p className="sign-up-form__field-error">{errorMes}</p>
+              <p className="registration-form__field__error-message">
+                {errorMes}
+              </p>
             )}
           />
         </div>
 
-        <div className="sign-up-form__field-box">
-          <LockIcon className="sign-up-form__field-icon" />
+        <div className="registration-form__field password-field">
+          <LockIcon className="registration-form__field__icon " />
 
           <Field
             type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
-            className="sign-up-form__field-input"
+            className="registration-form__field__input"
+            onInput={(event: FormEvent<HTMLInputElement>) =>
+              setPassword(event.currentTarget.value)
+            }
           />
 
           <ErrorMessage
             name="password"
             render={(errorMes) => (
-              <p className="sign-up-form__field-error">{errorMes}</p>
+              <p className="registration-form__field__error-message password-field__error-message">
+                {errorMes}
+              </p>
             )}
           />
 
           <EyeIcon
             onClick={() => setShowPassword(!showPassword)}
-            className="sign-up-form__password-icon"
+            className="password-field__hidden-icon"
           />
+
+          <div className="password-field__strength-estimator">
+            <PasswordStrengthEstimator password={password} />
+          </div>
         </div>
 
-        <div className="sign-up-form__field-box">
-          <LockIcon className="sign-up-form__field-icon" />
+        <div className="registration-form__field">
+          <LockIcon className="registration-form__field__icon" />
 
           <Field
             type={showPassword ? "text" : "password"}
             name="repeatedPassword"
             placeholder="Confirm password"
-            className="sign-up-form__field-input"
+            className="registration-form__field__input"
           />
 
           <ErrorMessage
             name="repeatedPassword"
             render={(errorMes) => (
-              <p className="sign-up-form__field-error">{errorMes}</p>
+              <p className="registration-form__field__error-message">
+                {errorMes}
+              </p>
             )}
           />
         </div>
 
-        <div className="sign-up-form__field-box">
-          <AccountIcon className="sign-up-form__field-icon" />
+        <div className="registration-form__field">
+          <AccountIcon className="registration-form__field__icon" />
 
           <Field
             type="text"
             name="name"
             placeholder="Your name"
-            className="sign-up-form__field-input"
+            className="registration-form__field__input"
           />
 
           <ErrorMessage
             name="name"
             render={(errorMes) => (
-              <p className="sign-up-form__field-error">{errorMes}</p>
+              <p className="registration-form__field__error-message">
+                {errorMes}
+              </p>
             )}
           />
         </div>
 
-        <button type="submit" className="sign-up-form__button main-button">
+        <button type="submit" className="registration-form__button main-button">
           Registration
         </button>
 
         <button
           type="button"
-          className="sign-up-form__button secondary-button"
+          className="registration-form__button secondary-button"
           onClick={() => toLoginPage()}
         >
           Login

@@ -1,4 +1,4 @@
-.registration-form {
+.login-form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -64,12 +64,6 @@
 }
 
 .password-field {
-  margin-bottom: 50px;
-
-  &__error-message {
-    bottom: -28px;
-  }
-
   &__hidden-icon {
     position: absolute;
     right: 7px;
@@ -81,12 +75,6 @@
     &:hover {
       fill: var(--main-text-color);
     }
-  }
-
-  &__strength-estimator {
-    position: absolute;
-    bottom: -11px;
-    width: 100%;
   }
 }
 

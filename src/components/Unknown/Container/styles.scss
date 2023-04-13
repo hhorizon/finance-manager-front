@@ -4,11 +4,11 @@
 
   @media (min-width: 480px) {
     width: 480px;
+    min-height: 100vh;
   }
 
   @media (min-width: 768px) {
     width: 768px;
-    min-height: 100vh;
   }
 
   @media (min-width: 1280px) {
@@ -16,10 +16,13 @@
   }
 
   &__background {
-    @media (min-width: 768px) {
-      width: 100%;
+    @media (min-width: 480px) {
       min-height: 100vh;
       background-color: #e7eaf2;
+    }
+
+    @media (min-width: 768px) {
+      width: 100%;
       background-image: url("../../../assets/img/ellipse-violet.png"),
         url("../../../assets/img/ellipse-pink.png");
       background-repeat: no-repeat, no-repeat;
@@ -28,7 +31,7 @@
   }
 
   &__backdrop {
-    @media (min-width: 768px) {
+    @media (min-width: 480px) {
       min-height: 100vh;
     }
   }

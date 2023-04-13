@@ -1,0 +1,14 @@
+.progress {
+  &__background {
+    margin-bottom: 1px;
+    height: 7px;
+    background-color: var(--placeholder-secondary-color);
+    border-radius: 4px;
+  }
+
+  &__bar {
+    height: 7px;
+    border-radius: 4px;
+    transition: var(--main-transaction);
+  }
+}
