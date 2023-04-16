@@ -6,7 +6,7 @@ import Sidebar from "../../Unknown/Sidebar";
 import TransactionsList from "../TransactionsList";
 import AddTransactionModal from "../../Unknown/AddTransactionModal";
 import ModalContainer from "../../Unknown/ModalContainer";
-import Pagination from "../../Unknown/Pagination";
+// import Pagination from "../../Unknown/Pagination";
 import { PlusIcon } from "../../../icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";

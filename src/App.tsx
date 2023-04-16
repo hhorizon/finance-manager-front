@@ -13,7 +13,7 @@ import Loader from "./components/Unknown/Loader";
 
 import { useAppDispatch } from "./redux/hooks";
 import { refreshCurrentUser } from "./redux/auth/operations";
-import { fetchAllTransactions } from "./redux/transactions/operations";
+// import { fetchAllTransactions } from "./redux/transactions/operations";
 
 function App() {
   const dispatch = useAppDispatch();
