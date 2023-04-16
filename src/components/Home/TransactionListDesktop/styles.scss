@@ -1,10 +1,4 @@
-.trans-list {
-  &__mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
+.trans-list-desktop {
   &__head {
     display: grid;
     grid-template-columns: 98px 200px 200px 105px 105px;
@@ -20,14 +14,17 @@
     }
   }
 
-  &__table {
+  &__body {
     &__item {
       display: grid;
       grid-template-columns: 118px 190px 190px 105px 105px;
       padding-top: 15px;
       padding-bottom: 15px;
-      border-bottom: 1px solid var(--main-placeholder-color);
-      box-shadow: 0px 1px 0px var(--main--shadow-color);
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--main-placeholder-color);
+        box-shadow: 0px 1px 0px var(--main-shadow-color);
+      }
     }
 
     &__value {
@@ -70,5 +67,10 @@
         color: var(--green-color);
       }
     }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
   }
 }

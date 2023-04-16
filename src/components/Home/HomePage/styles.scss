@@ -1,11 +1,7 @@
 .home-page {
   position: relative;
-  padding: 60px 20px;
+  padding: 60px 0 30px;
   min-height: 100vh;
-
-  @media (min-width: 768px) {
-    padding: 60px 0;
-  }
 
   @media (min-width: 1280px) {
     display: flex;
@@ -42,9 +38,6 @@
   }
 
   &__trasactions-list-wrapper {
-    // height: 600px;
-    // overflow-y: scroll;
-
     @media (min-width: 1280px) {
       padding-top: 40px;
     }

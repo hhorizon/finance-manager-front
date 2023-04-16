@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import Container from "../../Unknown/Container";
 import Header from "../../Unknown/Header";
 import Sidebar from "../../Unknown/Sidebar";
-import TransactionsList from "../TransactionsList";
 import AddTransactionModal from "../../Unknown/AddTransactionModal";
 import ModalContainer from "../../Unknown/ModalContainer";
-// import Pagination from "../../Unknown/Pagination";
+import TransactionListMobile from "../TransactionListMobile";
+import TransactionListDesktop from "../TransactionListDesktop";
+
 import { PlusIcon } from "../../../icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
@@ -23,18 +25,17 @@ const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const isAddModalOpen = useAppSelector(isAddModalOpenSelector);
   const allTransactions = useAppSelector(allTransactionsSelector);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      const isBottom =
-        Math.ceil(window.innerHeight + window.scrollY) >=
-        document.documentElement.scrollHeight;
+  const fetchNextPageOnScroll = () => {
+    if (allTransactions.nextPage) {
+      dispatch(fetchNextPage(allTransactions.nextPage));
+    }
+  };
 
-      if (isBottom && allTransactions.nextPage) {
-        dispatch(fetchNextPage(allTransactions.nextPage));
-      }
-    });
-  }, [allTransactions, dispatch]);
+  const fetchNextPageOnPaginationChange = (page: number) => {
+    dispatch(fetchAllTransactions(page));
+  };
 
   useEffect(() => {
     dispatch(fetchAllTransactions(1));
@@ -49,16 +50,20 @@ const HomePage: React.FC = () => {
             <Sidebar balance="24000" />
           </div>
 
-          {allTransactions.transaction.length > 1 && (
+          {allTransactions.transaction.length !== 0 && (
             <div className="home-page__trasactions-list-wrapper">
-              <TransactionsList transactions={allTransactions.transaction} />
-
-              {/* <Pagination
-                totalPages={allTransactions.totalPages}
-                onPaginationChange={(page) =>
-                  dispatch(fetchAllTransactions(page))
-                }
-              /> */}
+              {isMobile ? (
+                <TransactionListMobile
+                  transactions={allTransactions.transaction}
+                  onBottomScroll={fetchNextPageOnScroll}
+                />
+              ) : (
+                <TransactionListDesktop
+                  transactions={allTransactions.transaction}
+                  totalPages={allTransactions.totalPages}
+                  onPaginationChange={fetchNextPageOnPaginationChange}
+                />
+              )}
             </div>
           )}
         </div>

@@ -1,6 +1,9 @@
 .pagination {
   display: flex;
   gap: 15px;
+  padding-top: 10px;
+  border-top: 1px solid var(--main-placeholder-color);
+  box-shadow: 0px -1px 0px var(--main-shadow-color);
 
   & > li {
     height: 20px;
