@@ -1,22 +1,30 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Loader from "../Loader";
+
 import { useAppSelector } from "../../../redux/hooks";
-import { getToken } from "../../../redux/auth/auth-selectors";
+import {
+  userSelector,
+  isAuthLoadingSelector,
+} from "../../../redux/auth/selectors";
 
 interface PublicRouteProps {
   children: React.ReactNode;
 }
 
 const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
-  const navigation = useNavigate();
-  const token = useAppSelector(getToken);
+  const navigate = useNavigate();
+  const user = useAppSelector(userSelector);
+  const isAuthLoading = useAppSelector(isAuthLoadingSelector);
 
   useEffect(() => {
-    if (token) {
-      navigation("/");
+    if (user.email) {
+      navigate("/");
     }
-  }, [navigation, token]);
+  }, [navigate, user.email]);
+
+  if (isAuthLoading) return <Loader />;
 
   return <>{children}</>;
 };

@@ -7,6 +7,11 @@ import ExitIcon from "./exit";
 import HomeIcon from "./home";
 import StatisticsIcon from "./statistics";
 import CurrencyIcon from "./currency";
+import PlusIcon from "./plus";
+import MinusIcon from "./minus";
+import CloseIcon from "./close";
+import ArrowDownIcon from "./arrowDown";
+import CalendarIcon from "./calendar";
 
 export {
   EyeIcon,
@@ -18,4 +23,9 @@ export {
   HomeIcon,
   StatisticsIcon,
   CurrencyIcon,
+  PlusIcon,
+  MinusIcon,
+  CloseIcon,
+  ArrowDownIcon,
+  CalendarIcon,
 };

@@ -3,11 +3,13 @@
   min-height: 100vh;
 
   @media (min-width: 768px) {
-    max-width: 708px;
+    padding: 0 30px;
+    max-width: 768px;
   }
 
   @media (min-width: 1280px) {
-    max-width: 1250px;
+    padding: 0 15px;
+    max-width: 1280px;
   }
 
   &__background {

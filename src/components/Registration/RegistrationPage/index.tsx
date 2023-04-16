@@ -6,7 +6,7 @@ import registretionImage from "../../../assets/img/registretion-page-img.png";
 
 import { RegistrationFormValues } from "../RegistrationForm/validation";
 import { useAppDispatch } from "../../../redux/hooks";
-import { signUp } from "../../../redux/auth/auth-operations";
+import { signUp } from "../../../redux/auth/operations";
 import "./styles.scss";
 
 const RegistrationPage: React.FC = () => {

@@ -1,0 +1,15 @@
+.modal-container {
+  &__backdrop {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--third-shadow-color);
+    z-index: 11;
+  }
+}

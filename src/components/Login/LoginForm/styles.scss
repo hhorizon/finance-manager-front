@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
-    border-bottom: 1px solid var(--placeholder-secondary-color);
+    border-bottom: 1px solid var(--secondary-placeholder-color);
 
     &__icon {
       position: absolute;
@@ -36,7 +36,7 @@
       outline: none;
 
       &::placeholder {
-        color: var(--placeholder-main-color);
+        color: var(--main-placeholder-color);
       }
     }
 
@@ -68,7 +68,7 @@
     position: absolute;
     right: 7px;
     bottom: 1px;
-    fill: var(--placeholder-third-color);
+    fill: var(--third-placeholder-color);
     transition: var(--main-transition);
     cursor: pointer;
 

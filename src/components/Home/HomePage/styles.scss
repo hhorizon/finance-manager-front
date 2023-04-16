@@ -1,56 +1,77 @@
 .home-page {
   position: relative;
   padding: 60px 20px;
+  min-height: 100vh;
 
   @media (min-width: 768px) {
     padding: 60px 0;
   }
 
-  &__side-bar {
-    margin-top: 15px;
+  @media (min-width: 1280px) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__sidebar-wrapper {
     margin-bottom: 30px;
+    padding-top: 15px;
 
     @media (min-width: 768px) {
-      display: flex;
-      align-items: flex-end;
       margin-bottom: 20px;
-      gap: 32px;
     }
 
     @media (min-width: 1280px) {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 40px;
       margin-bottom: 0;
-      padding-right: 50px;
+      padding-top: 40px;
+      padding-right: 60px;
       box-sizing: border-box;
-      width: 460px;
+      width: 480px;
 
       &::after {
         content: "";
         position: absolute;
-        left: 460px;
+        left: 480px;
         top: 0;
-        height: 100vh;
+        height: 100%;
         width: 1px;
         background-color: var(--main-background-color);
-        box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.05),
-          1px 0px 0px rgba(255, 255, 255, 0.6);
+        box-shadow: -1px 0px 0px var(--secondary-shadow-color),
+          1px 0px 0px var(--main-shadow-color);
       }
     }
+  }
 
-    &__navigation-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      width: 100%;
+  &__trasactions-list-wrapper {
+    // height: 600px;
+    // overflow-y: scroll;
 
-      @media (min-width: 768px) {
-        align-items: start;
-        gap: 25px;
-      }
+    @media (min-width: 1280px) {
+      padding-top: 40px;
     }
+  }
+}
+
+.add-transaction-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  background-color: var(--green-color);
+  box-shadow: 0px 6px 15px var(--green-transperent-color);
+  filter: drop-shadow(0px 3px 10px var(--main-transparent-color));
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: var(--main-transition);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @media (min-width: 768px) {
+    bottom: 40px;
+    right: 40px;
   }
 }

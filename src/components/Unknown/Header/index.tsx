@@ -4,14 +4,14 @@ import Logo from "../Logo";
 import { ExitIcon } from "../../../icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { signOut } from "../../../redux/auth/auth-operations";
-import { getUser } from "../../../redux/auth/auth-selectors";
+import { signOut } from "../../../redux/auth/operations";
+import { userSelector } from "../../../redux/auth/selectors";
 
 import "./styles.scss";
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(getUser);
+  const user = useAppSelector(userSelector);
 
   const onExit = () => {
     try {
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__container">
         <Logo />
 
@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           </button>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

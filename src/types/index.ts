@@ -5,43 +5,6 @@ export type PrivateBankCurrency = {
   sale: string;
 };
 
-export interface IUser {
-  name: string;
-  email: string;
-  password: string;
-  subscription: string;
-  avatarURL: string;
-  token: string | null;
-  verify: boolean;
-  verificationToken: string;
-  // isValidPassword: (passwod: string) => Promise<boolean>;
-}
-
-export interface IContact {
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  favorite: boolean;
-  // owner: ObjectId;
-}
-
-export interface UserDocument extends Document, IUser {}
-
-export interface ContactDocument extends Document, IContact {}
-
-export type UserCredential = {
-  email: string;
-  password: string;
-};
-
-// export type CustomJwtPayload = JwtPayload & {
-//   id: string;
-// };
-
-export type Subscription = "starter" | "pro" | "business";
-
-// //////////////////////////////////////////////
 export type RegistrationCredential = {
   email: string;
   password: string;
@@ -75,3 +38,37 @@ export type RefreshCurrentPayload = {
 export type RefreshCurrentResponse = {
   payload: RefreshCurrentPayload;
 };
+
+// ///////////////////// //
+
+export type TransactionType = "spending" | "incoming";
+
+export type Transaction = {
+  _id: string;
+  type: TransactionType;
+  category: string;
+  sum: number;
+  date: Date;
+  comment: string;
+};
+
+export type AllTransactionsData = {
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  page: number;
+  totalPages: number;
+  totalTransaction: number;
+  transaction: Transaction[];
+  nextPage: number | null;
+};
+
+export type AllTransactionsResponse = {
+  payload: AllTransactionsData;
+};
+
+export type AddTransactionResponse = {
+  payload: Transaction;
+};
+
+export type AddTransactionRequestBody = Omit<Transaction, "_id">;

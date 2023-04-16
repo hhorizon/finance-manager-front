@@ -1,12 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 import { HomeIcon, StatisticsIcon, CurrencyIcon } from "../../../icons";
 
 import "./styles.scss";
 
-const NavigationBar: React.FC = () => {
+const Navigation: React.FC = () => {
+  const location = useLocation();
+
   const isMobile = useMediaQuery({
     maxWidth: 767,
   });
@@ -15,6 +17,9 @@ const NavigationBar: React.FC = () => {
     <nav className="navigation">
       <NavLink
         to="/"
+        state={{
+          from: location.pathname,
+        }}
         className={({ isActive }) =>
           isActive ? "navigation__link active-link" : "navigation__link"
         }
@@ -35,6 +40,9 @@ const NavigationBar: React.FC = () => {
 
       <NavLink
         to="/statistics"
+        state={{
+          from: location.pathname,
+        }}
         className={({ isActive }) =>
           isActive ? "navigation__link active-link" : "navigation__link"
         }
@@ -56,6 +64,9 @@ const NavigationBar: React.FC = () => {
       {isMobile && (
         <NavLink
           to="/currency"
+          state={{
+            from: location.pathname,
+          }}
           className={({ isActive }) =>
             isActive ? "navigation__link active-link" : "navigation__link"
           }
@@ -67,4 +78,4 @@ const NavigationBar: React.FC = () => {
   );
 };
 
-export default NavigationBar;
+export default Navigation;

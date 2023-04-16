@@ -6,7 +6,7 @@ import loginImage from "../../../assets/img/login-page-img.png";
 
 import { LoginFormValues } from "../LoginForm/validation";
 import { useAppDispatch } from "../../../redux/hooks";
-import { signIn } from "../../../redux/auth/auth-operations";
+import { signIn } from "../../../redux/auth/operations";
 import "./styles.scss";
 
 const LoginPage: React.FC = () => {

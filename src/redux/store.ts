@@ -12,9 +12,9 @@ import {
 import storage from "redux-persist/lib/storage";
 import thunkMiddleware from "redux-thunk";
 
-// import { movieAPI } from "../services/movieService";
-// import commonReducer from "./common/common-reducer";
-import authReducer from "./auth/auth-slice";
+import commonReducer from "./common/reducer";
+import authReducer from "./auth/slice";
+import transactionsReducer from "./transactions/slice";
 
 const authPersistConfig = {
   key: "auth",
@@ -23,9 +23,9 @@ const authPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  common: commonReducer,
   auth: persistReducer(authPersistConfig, authReducer),
-  //   [movieAPI.reducerPath]: movieAPI.reducer,
-  //   common: commonReducer,
+  transactions: transactionsReducer,
 });
 
 export const store = configureStore({
@@ -37,7 +37,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }).concat(thunkMiddleware),
-  // .concat(movieAPI.middleware),
 });
 
 export const persistor = persistStore(store);

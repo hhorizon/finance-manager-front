@@ -1,0 +1,26 @@
+.sidebar {
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+  }
+
+  @media (min-width: 1280px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__navigation-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      align-items: start;
+      gap: 25px;
+    }
+  }
+}

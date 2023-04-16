@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signUp, signIn, refreshCurrentUser, signOut } from "./auth-operations";
+import { signUp, signIn, refreshCurrentUser, signOut } from "./operations";
 import { UserData } from "../../types";
 
 type AuthState = {
   userData: UserData;
-  isloading: boolean;
+  isAuthLoading: boolean;
   token: string | null;
 };
 
@@ -14,7 +14,7 @@ const initialState: AuthState = {
     name: null,
     subscription: null,
   },
-  isloading: false,
+  isAuthLoading: false,
   token: null,
 };
 
@@ -25,48 +25,48 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     // signUp
     builder.addCase(signUp.pending, (state, { payload }) => {
-      state.isloading = true;
+      state.isAuthLoading = true;
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
     builder.addCase(signUp.rejected, (state, { payload }) => {
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
     // signIn
     builder.addCase(signIn.pending, (state, { payload }) => {
-      state.isloading = true;
+      state.isAuthLoading = true;
     });
     builder.addCase(signIn.fulfilled, (state, { payload }) => {
       state.userData = payload.user;
       state.token = payload.token;
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
     builder.addCase(signIn.rejected, (state, { payload }) => {
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
     // refresh current user
     builder.addCase(refreshCurrentUser.pending, (state, { payload }) => {
-      state.isloading = true;
+      state.isAuthLoading = true;
     });
     builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
       state.userData = payload.user;
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
     builder.addCase(refreshCurrentUser.rejected, (state, { payload }) => {
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
     // signOut
     builder.addCase(signOut.pending, (state, { payload }) => {
-      state.isloading = true;
+      state.isAuthLoading = true;
     });
     builder.addCase(signOut.fulfilled, (state, { payload }) => {
       state.userData = initialState.userData;
       state.token = null;
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
     builder.addCase(signOut.rejected, (state, { payload }) => {
-      state.isloading = false;
+      state.isAuthLoading = false;
     });
   },
 });

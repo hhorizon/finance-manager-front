@@ -16,11 +16,11 @@ const Container: React.FC<ContainerProps> = ({
     : "container__backdrop";
 
   return (
-    <div className="container__background">
+    <main className="container__background">
       <div className={backdropClassName}>
         <div className="container">{children}</div>
       </div>
-    </div>
+    </main>
   );
 };
 

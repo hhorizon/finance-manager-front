@@ -1,6 +1,10 @@
 @import "./fonts.scss";
 @import "./vars.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
@@ -35,6 +39,7 @@ li {
 }
 
 body {
+  box-sizing: border-box;
   margin: 0;
   height: 100%;
   font-family: var(--main-font);
