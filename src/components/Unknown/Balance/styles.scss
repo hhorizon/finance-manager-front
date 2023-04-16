@@ -1,7 +1,6 @@
 .balance {
   padding: 10px 40px;
   width: 100%;
-  box-sizing: border-box;
   background-color: var(--white-background-color);
   border-radius: 30px;
 
@@ -16,5 +15,43 @@
     font-weight: 600;
     font-size: 30px;
     line-height: 45px;
+  }
+
+  &__add {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    width: 100%;
+    background-color: var(--white-background-color);
+    border-radius: 30px;
+    cursor: pointer;
+
+    &__input {
+      text-align: center;
+      width: 100%;
+      font-size: 20px;
+      border: none;
+      outline: none;
+
+      &:focus::placeholder {
+        color: transparent;
+      }
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &__button {
+      position: absolute;
+      right: 10px;
+      transform: rotate(-90deg);
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 }

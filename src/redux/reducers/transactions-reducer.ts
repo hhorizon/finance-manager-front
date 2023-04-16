@@ -7,7 +7,7 @@ import {
 import { AllTransactionsData } from "../../types";
 
 type TransactionsState = {
-  allTransition: AllTransactionsData;
+  allTransition: Omit<AllTransactionsData, "balance">;
   isAllTransactionsLoading: boolean;
   isAddTransactionLoading: boolean;
 };

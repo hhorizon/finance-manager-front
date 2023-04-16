@@ -7,9 +7,9 @@ import {
   RegistrationCredential,
   LoginCredential,
   LoginResponse,
-  LoginResponsePayload,
+  LoginResponseData,
   RefreshCurrentResponse,
-  RefreshCurrentPayload,
+  RefreshCurrentData,
 } from "../../types";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
@@ -42,7 +42,7 @@ export const signUp = createAsyncThunk<void, RegistrationCredential>(
   },
 );
 
-export const signIn = createAsyncThunk<LoginResponsePayload, LoginCredential>(
+export const signIn = createAsyncThunk<LoginResponseData, LoginCredential>(
   "auth/signIn",
   async (credentials, thunkAPI) => {
     try {
@@ -64,7 +64,7 @@ export const signIn = createAsyncThunk<LoginResponsePayload, LoginCredential>(
 );
 
 export const refreshCurrentUser = createAsyncThunk<
-  RefreshCurrentPayload,
+  RefreshCurrentData,
   void,
   { state: RootState }
 >("auth/refreshCurrentUser", async (_, thunkAPI) => {

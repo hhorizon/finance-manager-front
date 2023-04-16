@@ -7,11 +7,7 @@ import Balance from "../Balance";
 
 import "./styles.scss";
 
-interface SidebarProps {
-  balance: string;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ balance }) => {
+const Sidebar: React.FC = () => {
   const isMobile = useMediaQuery({
     maxWidth: 767,
   });
@@ -21,7 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ balance }) => {
       <div className="sidebar__navigation-wrapper">
         <Navigation />
 
-        <Balance balance={balance} />
+        <Balance />
       </div>
 
       {!isMobile && <CurrencyTab />}

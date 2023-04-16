@@ -48,7 +48,7 @@ const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
               {transaction.sum}
             </div>
             <div className="trans-list-desktop__body__value trans-list-desktop__body__value--end">
-              18 000
+              {transaction.balance}
             </div>
           </li>
         ))}

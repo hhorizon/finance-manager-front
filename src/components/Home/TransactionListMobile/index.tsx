@@ -72,7 +72,9 @@ const TransactionListMobile: React.FC<TransactionListMobileProps> = ({
           </div>
           <div className="trans-list-mobile__item__field">
             <p className="trans-list-mobile__item__field__name">Balance</p>
-            <p className="trans-list-mobile__item__field__value"></p>
+            <p className="trans-list-mobile__item__field__value">
+              {transaction.balance}
+            </p>
           </div>
         </li>
       ))}

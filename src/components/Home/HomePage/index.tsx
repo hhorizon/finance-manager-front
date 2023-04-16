@@ -22,11 +22,14 @@ import {
   fetchNextPage,
 } from "../../../redux/actions/transactions-operations";
 import { allTransactionsSelector } from "../../../redux/selectors/transactions-selectors";
+import { userSelector } from "../../../redux/selectors/user-selectors";
 import "./styles.scss";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const isAddModalOpen = useAppSelector(isAddModalOpenSelector);
+  const user = useAppSelector(userSelector);
+
   const { transactions, page, totalPages, nextPage } = useAppSelector(
     allTransactionsSelector,
   );
@@ -52,7 +55,7 @@ const HomePage: React.FC = () => {
       <Container withBlur>
         <div className="home-page">
           <div className="home-page__sidebar-wrapper">
-            <Sidebar balance="24000" />
+            <Sidebar />
           </div>
 
           {transactions.length !== 0 && (
@@ -75,12 +78,14 @@ const HomePage: React.FC = () => {
         </div>
       </Container>
 
-      <button
-        className="add-transaction-button"
-        onClick={() => dispatch(openAddModal())}
-      >
-        <PlusIcon />
-      </button>
+      {user.balance && (
+        <button
+          className="add-transaction-button"
+          onClick={() => dispatch(openAddModal())}
+        >
+          <PlusIcon />
+        </button>
+      )}
 
       {isAddModalOpen && (
         <ModalContainer closeModal={() => dispatch(closeAddModal())}>

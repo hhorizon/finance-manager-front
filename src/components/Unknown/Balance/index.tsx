@@ -1,17 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
+import { ArrowDownIcon } from "../../../icons";
+
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { updateBalance } from "../../../redux/actions/user-operations";
+import { userSelector } from "../../../redux/selectors/user-selectors";
 import "./styles.scss";
 
-interface BalanceProps {
-  balance: string;
-}
+const Balance: React.FC = () => {
+  const [inputValue, setInputValue] = useState("");
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(userSelector);
 
-const Balance: React.FC<BalanceProps> = ({ balance }) => {
+  if (user.balance)
+    return (
+      <div className="balance">
+        <p className="balance__title">Balance</p>
+        <p className="balance__quantity">{user.balance}</p>
+      </div>
+    );
+
   return (
-    <div className="balance">
-      <p className="balance__title">Balance</p>
-      <p className="balance__quantity">{balance}</p>
-    </div>
+    <label className="balance__add">
+      <input
+        type="number"
+        step={0.5}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Add your balance to start"
+        className="balance__add__input"
+      />
+
+      <button
+        className="balance__add__button"
+        onClick={() => dispatch(updateBalance(Number(inputValue)))}
+      >
+        <ArrowDownIcon />
+      </button>
+    </label>
   );
 };
 

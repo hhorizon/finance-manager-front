@@ -13,7 +13,7 @@ const StatisticsPage: React.FC = () => {
       <Container withBlur>
         <div className="home-page">
           <div className="home-page__sidebar-wrapper">
-            <Sidebar balance="24000" />
+            <Sidebar />
           </div>
         </div>
       </Container>
