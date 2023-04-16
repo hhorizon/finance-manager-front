@@ -12,24 +12,29 @@ import TransactionListDesktop from "../TransactionListDesktop";
 import { PlusIcon } from "../../../icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { openAddModal, closeAddModal } from "../../../redux/common/actions";
-import { isAddModalOpenSelector } from "../../../redux/common/selectors";
+import {
+  openAddModal,
+  closeAddModal,
+} from "../../../redux/actions/common-actions";
+import { isAddModalOpenSelector } from "../../../redux/selectors/common-selectors";
 import {
   fetchAllTransactions,
   fetchNextPage,
-} from "../../../redux/transactions/operations";
-import { allTransactionsSelector } from "../../../redux/transactions/selectors";
+} from "../../../redux/actions/transactions-operations";
+import { allTransactionsSelector } from "../../../redux/selectors/transactions-selectors";
 import "./styles.scss";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const isAddModalOpen = useAppSelector(isAddModalOpenSelector);
-  const allTransactions = useAppSelector(allTransactionsSelector);
+  const { transactions, page, totalPages, nextPage } = useAppSelector(
+    allTransactionsSelector,
+  );
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const fetchNextPageOnScroll = () => {
-    if (allTransactions.nextPage) {
-      dispatch(fetchNextPage(allTransactions.nextPage));
+    if (nextPage) {
+      dispatch(fetchNextPage(nextPage));
     }
   };
 
@@ -50,17 +55,18 @@ const HomePage: React.FC = () => {
             <Sidebar balance="24000" />
           </div>
 
-          {allTransactions.transaction.length !== 0 && (
+          {transactions.length !== 0 && (
             <div className="home-page__trasactions-list-wrapper">
               {isMobile ? (
                 <TransactionListMobile
-                  transactions={allTransactions.transaction}
+                  transactions={transactions}
                   onBottomScroll={fetchNextPageOnScroll}
                 />
               ) : (
                 <TransactionListDesktop
-                  transactions={allTransactions.transaction}
-                  totalPages={allTransactions.totalPages}
+                  transactions={transactions}
+                  currentPage={page}
+                  totalPages={totalPages}
                   onPaginationChange={fetchNextPageOnPaginationChange}
                 />
               )}

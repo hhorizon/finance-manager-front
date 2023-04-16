@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { openAddModal, closeAddModal } from "./actions";
+import { openAddModal, closeAddModal } from "../actions/common-actions";
 // import { MovieWithFavorite, FirebaseStatus } from "../../types";
 
 interface CommonState {

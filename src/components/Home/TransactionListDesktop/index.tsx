@@ -8,12 +8,14 @@ import "./styles.scss";
 
 interface TransactionListDesktopProps {
   transactions: Transaction[];
+  currentPage: number;
   totalPages: number;
   onPaginationChange: (page: number) => void;
 }
 
 const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
   transactions,
+  currentPage,
   totalPages,
   onPaginationChange,
 }) => {
@@ -55,6 +57,7 @@ const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
       {totalPages !== 1 && (
         <div className="trans-list-desktop__pagination">
           <Pagination
+            currentPage={currentPage}
             totalPages={totalPages}
             onPaginationChange={onPaginationChange}
           />

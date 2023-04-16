@@ -13,7 +13,7 @@ import { useAppDispatch } from "../../../redux/hooks";
 import {
   addTransaction,
   fetchAllTransactions,
-} from "../../../redux/transactions/operations";
+} from "../../../redux/actions/transactions-operations";
 import "./styles.scss";
 
 interface AddTransactionModalProps {

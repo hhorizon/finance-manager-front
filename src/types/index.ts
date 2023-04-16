@@ -19,6 +19,7 @@ export type LoginCredential = {
 export type UserData = {
   name: string | null;
   email: string | null;
+  balance: number | null;
   subscription: string | null;
 };
 
@@ -59,7 +60,7 @@ export type AllTransactionsData = {
   page: number;
   totalPages: number;
   totalTransaction: number;
-  transaction: Transaction[];
+  transactions: Transaction[];
   nextPage: number | null;
 };
 

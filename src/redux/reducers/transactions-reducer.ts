@@ -3,7 +3,7 @@ import {
   fetchAllTransactions,
   addTransaction,
   fetchNextPage,
-} from "./operations";
+} from "../actions/transactions-operations";
 import { AllTransactionsData } from "../../types";
 
 type TransactionsState = {
@@ -20,7 +20,7 @@ const initialState: TransactionsState = {
     page: 1,
     totalPages: 0,
     totalTransaction: 0,
-    transaction: [],
+    transactions: [],
     nextPage: null,
   },
   isAllTransactionsLoading: false,
@@ -62,9 +62,9 @@ const transactionsSlice = createSlice({
     builder.addCase(fetchNextPage.fulfilled, (state, { payload }) => {
       state.allTransition = {
         ...payload,
-        transaction: [
-          ...state.allTransition.transaction,
-          ...payload.transaction,
+        transactions: [
+          ...state.allTransition.transactions,
+          ...payload.transactions,
         ],
       };
     });

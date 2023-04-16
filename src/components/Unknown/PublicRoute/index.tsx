@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 
 import { useAppSelector } from "../../../redux/hooks";
-import {
-  userSelector,
-  isAuthLoadingSelector,
-} from "../../../redux/auth/selectors";
+import { isAuthLoadingSelector } from "../../../redux/selectors/auth-selectors";
+import { userSelector } from "../../../redux/selectors/user-selectors";
 
 interface PublicRouteProps {
   children: React.ReactNode;

@@ -4,8 +4,8 @@ import Logo from "../Logo";
 import { ExitIcon } from "../../../icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { signOut } from "../../../redux/auth/operations";
-import { userSelector } from "../../../redux/auth/selectors";
+import { signOut } from "../../../redux/actions/auth-operations";
+import { userSelector } from "../../../redux/selectors/user-selectors";
 
 import "./styles.scss";
 
