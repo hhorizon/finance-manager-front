@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import Logo from "../../Unknown/Logo";
+import Button from "../../Unknown/Button";
 import { EyeIcon, EmailIcon, LockIcon } from "../../Unknown/Icons";
 
 import validate from "./validation";
@@ -77,21 +78,17 @@ const LoginForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
           <EyeIcon
             onClick={() => setShowPassword(!showPassword)}
-            className="password-field__hidden-icon"
+            className="login-form__field__hidden-icon"
           />
         </div>
 
-        <button type="submit" className="login-form__button main-button">
+        <Button variant="main" type="submit">
           Login
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          className="login-form__button secondary-button"
-          onClick={() => toRegistrationPage()}
-        >
+        <Button type="button" onClick={() => toRegistrationPage()}>
           Registration
-        </button>
+        </Button>
       </Form>
     </Formik>
   );

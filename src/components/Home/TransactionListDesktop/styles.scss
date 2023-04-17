@@ -18,8 +18,8 @@
     &__item {
       display: grid;
       grid-template-columns: 118px 190px 190px 105px 105px;
-      padding-top: 15px;
-      padding-bottom: 15px;
+      height: 55px;
+      cursor: pointer;
 
       &:not(:last-child) {
         border-bottom: 1px solid var(--main-placeholder-color);

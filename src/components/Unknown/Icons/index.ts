@@ -12,6 +12,8 @@ import MinusIcon from "./minus";
 import CloseIcon from "./close";
 import ArrowDownIcon from "./arrowDown";
 import CalendarIcon from "./calendar";
+import SaveIcon from "./seve";
+import DeleteIcon from "./delete";
 
 export {
   EyeIcon,
@@ -28,4 +30,6 @@ export {
   CloseIcon,
   ArrowDownIcon,
   CalendarIcon,
+  SaveIcon,
+  DeleteIcon,
 };

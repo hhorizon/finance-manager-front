@@ -5,6 +5,7 @@ import { ArrowDownIcon } from "../Icons";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { updateBalance } from "../../../redux/actions/user-operations";
 import { userSelector } from "../../../redux/selectors/user-selectors";
+import { normalizeAmount } from "../../../utils/normalizeAmount";
 import "./styles.scss";
 
 const Balance: React.FC = () => {
@@ -38,7 +39,7 @@ const Balance: React.FC = () => {
   return (
     <div className="balance">
       <p className="balance__title">Balance</p>
-      <p className="balance__quantity">{user.balance}</p>
+      <p className="balance__quantity"> ₴ {normalizeAmount(user.balance)}</p>
     </div>
   );
 };

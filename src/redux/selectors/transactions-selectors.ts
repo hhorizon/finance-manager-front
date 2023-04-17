@@ -6,8 +6,5 @@ export const allTransactionsSelector = (state: RootState) =>
 export const categoriesSelector = (state: RootState) =>
   state.transactions.categories;
 
-export const isAllTransactionsLoadingSelector = (state: RootState) =>
-  state.transactions.isAllTransactionsLoading;
-
-export const isAddTransactionLoadingSelector = (state: RootState) =>
-  state.transactions.isAddTransactionLoading;
+export const isTransactionsLoadingSelector = (state: RootState) =>
+  state.transactions.isTransactionsLoading;

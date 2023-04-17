@@ -16,18 +16,13 @@ import {
 } from "../../../redux/actions/transactions-operations";
 import { categoriesSelector } from "../../../redux/selectors/transactions-selectors";
 import { mapCategoriesForSelect } from "../../../utils/mapCategoriesForSelect";
+import { AddFormValues } from "../../../types";
 import "./styles.scss";
 
 interface AddTransactionModalProps {
   closeModal: () => void;
 }
 
-type FormValues = {
-  category: string;
-  sum: number;
-  date: Date;
-  comment: string;
-};
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
   closeModal,
 }) => {
@@ -37,14 +32,14 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
 
   const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
-  const initialValues: FormValues = {
+  const initialValues: AddFormValues = {
     category: "",
     sum: 0,
     date: new Date(),
-    comment: " ",
+    comment: "",
   };
 
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (values: AddFormValues) => {
     await dispatch(addTransaction({ type, ...values }));
     await dispatch(fetchAllTransactions(1));
     closeModal();
@@ -66,19 +61,19 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
         <CloseIcon />
       </button>
 
-      <p className="add-modal__title">Add transaction</p>
-
-      <div className="add-modal__toggle-container">
-        <p className={setActiveTypeNameClass("incoming")}>Incoming</p>
-
-        <Toggle onInputChange={handlerTypeChange} />
-
-        <p className={setActiveTypeNameClass("spending")}>Spending</p>
-      </div>
-
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ values, setFieldValue }) => (
           <Form className="add-modal__form">
+            <p className="add-modal__title">Add transaction</p>
+
+            <div className="add-modal__toggle-container">
+              <p className={setActiveTypeNameClass("incoming")}>Incoming</p>
+
+              <Toggle onInputChange={handlerTypeChange} />
+
+              <p className={setActiveTypeNameClass("spending")}>Spending</p>
+            </div>
+
             <div className="add-modal__field">
               <SelectField
                 required
@@ -128,6 +123,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
             <div className="add-modal__field">
               <Field
                 as="textarea"
+                maxLength="30"
                 name="comment"
                 placeholder="Comment"
                 className="add-modal__field__input add-modal__field__input-comment"

@@ -13,7 +13,7 @@ import Loader from "./components/Unknown/Loader";
 
 import { useAppDispatch } from "./redux/hooks";
 import { refreshCurrentUser } from "./redux/actions/auth-operations";
-// import { fetchAllTransactions } from "./redux/transactions/operations";
+import { fetchAllTransactions } from "./redux/actions/transactions-operations";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ function App() {
   };
 
   const fetchAllTransactionsLoader = async () => {
-    // await dispatch(fetchAllTransactions(1));
+    await dispatch(fetchAllTransactions(1));
 
     return null;
   };

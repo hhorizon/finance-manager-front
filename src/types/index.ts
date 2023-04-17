@@ -41,6 +41,13 @@ export type LoginFormValues = {
   password: string;
 };
 
+export type AddFormValues = {
+  category: string;
+  sum: number;
+  date: Date;
+  comment: string;
+};
+
 // Axios types
 // // registration
 export type RegistrationCredential = {
@@ -95,6 +102,24 @@ export type AddTransactionRequestBody = Omit<Transaction, "_id" | "balance">;
 
 export type AddTransactionResponse = {
   payload: Transaction;
+};
+
+// //update transaction
+export type UpdateTransactionData = {
+  transaction: Transaction;
+};
+
+export type UpdateTransactionResponse = {
+  payload: UpdateTransactionData;
+};
+
+// //delete transaction
+export type DeleteTransactionData = {
+  transaction: Transaction;
+};
+
+export type DeleteTransactionResponse = {
+  payload: DeleteTransactionData;
 };
 
 // // update balance

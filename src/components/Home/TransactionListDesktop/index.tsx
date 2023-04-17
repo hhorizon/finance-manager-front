@@ -1,23 +1,39 @@
 import React from "react";
 import moment from "moment";
 
+import ChangeTransactionFormDesktop from "../ChangeTransactionFormDesktop";
 import Pagination from "../../Unknown/Pagination";
 
-import { Transaction } from "../../../types";
+import { normalizeAmount } from "../../../utils/normalizeAmount";
+import {
+  Transaction,
+  AddTransactionRequestBody,
+  Categories,
+} from "../../../types";
 import "./styles.scss";
 
 interface TransactionListDesktopProps {
   transactions: Transaction[];
   currentPage: number;
   totalPages: number;
+  categories: Categories;
+  selectedTransaction: Transaction | null;
+  setSelectedTransaction: (transaction: Transaction | null) => void;
   onPaginationChange: (page: number) => void;
+  onUpdate: (id: string, body: AddTransactionRequestBody) => void;
+  onDelete: (id: string) => void;
 }
 
 const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
   transactions,
   currentPage,
   totalPages,
+  categories,
+  selectedTransaction,
+  setSelectedTransaction,
   onPaginationChange,
+  onUpdate,
+  onDelete,
 }) => {
   return (
     <div className="trans-list-desktop">
@@ -30,28 +46,44 @@ const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
       </div>
 
       <ul className="trans-list-desktop__body">
-        {transactions.map((transaction) => (
-          <li key={transaction._id} className="trans-list-desktop__body__item">
-            <div className="trans-list-desktop__body__value trans-list-desktop__body__value--center">
-              {moment(transaction.date).format("DD.MM.YYYY")}
-            </div>
-            <div className="trans-list-desktop__body__value trans-list-desktop__body__value--start">
-              {transaction.category}
-            </div>
-            <div className="trans-list-desktop__body__value trans-list-desktop__body__value--start trans-list-desktop__body__value--limit">
-              {transaction.comment}
-            </div>
-            <div
-              className={`trans-list-desktop__body__value 
-        trans-list-desktop__body__value--${transaction.type} trans-list-desktop__body__value--end`}
+        {transactions.map((transaction) =>
+          transaction._id === selectedTransaction?._id ? (
+            <ChangeTransactionFormDesktop
+              key={transaction._id}
+              transaction={selectedTransaction}
+              categories={categories}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
+              setSelectedTransaction={setSelectedTransaction}
+            />
+          ) : (
+            <li
+              key={transaction._id}
+              className="trans-list-desktop__body__item"
+              onClick={() => setSelectedTransaction(transaction)}
             >
-              {transaction.sum}
-            </div>
-            <div className="trans-list-desktop__body__value trans-list-desktop__body__value--end">
-              {transaction.balance}
-            </div>
-          </li>
-        ))}
+              <p className="trans-list-desktop__body__value trans-list-desktop__body__value--center">
+                {moment(transaction.date).format("DD.MM.YYYY")}
+              </p>
+              <p className="trans-list-desktop__body__value trans-list-desktop__body__value--start">
+                {transaction.category}
+              </p>
+              <p className="trans-list-desktop__body__value trans-list-desktop__body__value--start ">
+                <span className="trans-list-desktop__body__value--limit">
+                  {transaction.comment}
+                </span>
+              </p>
+              <p
+                className={`trans-list-desktop__body__value trans-list-desktop__body__value--${transaction.type} trans-list-desktop__body__value--end`}
+              >
+                {normalizeAmount(transaction.sum)}
+              </p>
+              <p className="trans-list-desktop__body__value trans-list-desktop__body__value--end">
+                {normalizeAmount(transaction.balance)}
+              </p>
+            </li>
+          ),
+        )}
       </ul>
 
       {totalPages !== 1 && (

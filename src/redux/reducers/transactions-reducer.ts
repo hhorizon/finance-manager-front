@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchAllTransactions,
   addTransaction,
+  updateTransaction,
   fetchNextPage,
 } from "../actions/transactions-operations";
 import { signIn, refreshCurrentUser } from "../actions/auth-operations";
@@ -10,8 +11,7 @@ import { AllTransactionsData, Categories } from "../../types";
 type TransactionsState = {
   allTransition: Omit<AllTransactionsData, "balance">;
   categories: Categories;
-  isAllTransactionsLoading: boolean;
-  isAddTransactionLoading: boolean;
+  isTransactionsLoading: boolean;
 };
 
 const initialState: TransactionsState = {
@@ -26,8 +26,7 @@ const initialState: TransactionsState = {
     nextPage: null,
   },
   categories: { incoming: [], spending: [] },
-  isAllTransactionsLoading: false,
-  isAddTransactionLoading: false,
+  isTransactionsLoading: false,
 };
 
 const transactionsSlice = createSlice({
@@ -37,30 +36,41 @@ const transactionsSlice = createSlice({
   extraReducers: (builder) => {
     // getAll
     builder.addCase(fetchAllTransactions.pending, (state) => {
-      state.isAllTransactionsLoading = true;
+      state.isTransactionsLoading = true;
     });
     builder.addCase(fetchAllTransactions.fulfilled, (state, { payload }) => {
       state.allTransition = payload;
-      state.isAllTransactionsLoading = false;
+      state.isTransactionsLoading = false;
     });
     builder.addCase(fetchAllTransactions.rejected, (state) => {
-      state.isAllTransactionsLoading = false;
+      state.isTransactionsLoading = false;
     });
 
     // add
     builder.addCase(addTransaction.pending, (state) => {
-      state.isAddTransactionLoading = true;
+      state.isTransactionsLoading = true;
     });
     builder.addCase(addTransaction.fulfilled, (state) => {
-      state.isAddTransactionLoading = false;
+      state.isTransactionsLoading = false;
     });
     builder.addCase(addTransaction.rejected, (state) => {
-      state.isAddTransactionLoading = false;
+      state.isTransactionsLoading = false;
+    });
+
+    // update
+    builder.addCase(updateTransaction.pending, (state) => {
+      state.isTransactionsLoading = true;
+    });
+    builder.addCase(updateTransaction.fulfilled, (state, { payload }) => {
+      state.isTransactionsLoading = false;
+    });
+    builder.addCase(updateTransaction.rejected, (state) => {
+      state.isTransactionsLoading = false;
     });
 
     // nextPage
     builder.addCase(fetchNextPage.pending, (state) => {
-      state.isAddTransactionLoading = true;
+      state.isTransactionsLoading = true;
     });
     builder.addCase(fetchNextPage.fulfilled, (state, { payload }) => {
       state.allTransition = {
@@ -72,7 +82,7 @@ const transactionsSlice = createSlice({
       };
     });
     builder.addCase(fetchNextPage.rejected, (state) => {
-      state.isAddTransactionLoading = false;
+      state.isTransactionsLoading = false;
     });
 
     // signIn

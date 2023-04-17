@@ -4,7 +4,7 @@ import "./styles.scss";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  variant?: "main" | "secondary";
+  variant?: "main" | "secondary" | "error";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button className={`button ${variant}`} {...props}>
+    <button className={`button--${variant}`} {...props}>
       {children}
     </button>
   );

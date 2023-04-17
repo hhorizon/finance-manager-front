@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import PasswordStrengthEstimator from "../../Unknown/PasswordStrengthEstimator";
 import Logo from "../../Unknown/Logo";
+import Button from "../../Unknown/Button";
 import { EyeIcon, EmailIcon, LockIcon, AccountIcon } from "../../Unknown/Icons";
 
 import validate from "./validation";
@@ -88,7 +89,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
           <EyeIcon
             onClick={() => setShowPassword(!showPassword)}
-            className="password-field__hidden-icon"
+            className="registration-form__field__hidden-icon"
           />
 
           <div className="password-field__strength-estimator">
@@ -136,17 +137,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           />
         </div>
 
-        <button type="submit" className="registration-form__button main-button">
+        <Button variant="main" type="submit">
           Registration
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          className="registration-form__button secondary-button"
-          onClick={() => toLoginPage()}
-        >
+        <Button type="button" onClick={() => toLoginPage()}>
           Login
-        </button>
+        </Button>
       </Form>
     </Formik>
   );
