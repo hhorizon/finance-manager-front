@@ -1,4 +1,8 @@
 export type TransactionType = "spending" | "incoming";
+export type Categories = {
+  incoming: Array<string>;
+  spending: Array<string>;
+};
 
 export type Transaction = {
   _id: string;
@@ -15,6 +19,7 @@ export type User = {
   email: string | null;
   balance: number | null;
   subscription: string | null;
+  categories: Categories;
 };
 
 export type PrivateBankCurrency = {

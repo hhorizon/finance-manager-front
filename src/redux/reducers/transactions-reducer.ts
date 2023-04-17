@@ -4,10 +4,12 @@ import {
   addTransaction,
   fetchNextPage,
 } from "../actions/transactions-operations";
-import { AllTransactionsData } from "../../types";
+import { signIn, refreshCurrentUser } from "../actions/auth-operations";
+import { AllTransactionsData, Categories } from "../../types";
 
 type TransactionsState = {
   allTransition: Omit<AllTransactionsData, "balance">;
+  categories: Categories;
   isAllTransactionsLoading: boolean;
   isAddTransactionLoading: boolean;
 };
@@ -23,6 +25,7 @@ const initialState: TransactionsState = {
     transactions: [],
     nextPage: null,
   },
+  categories: { incoming: [], spending: [] },
   isAllTransactionsLoading: false,
   isAddTransactionLoading: false,
 };
@@ -70,6 +73,16 @@ const transactionsSlice = createSlice({
     });
     builder.addCase(fetchNextPage.rejected, (state) => {
       state.isAddTransactionLoading = false;
+    });
+
+    // signIn
+    builder.addCase(signIn.fulfilled, (state, { payload }) => {
+      state.categories = payload.user.categories;
+    });
+
+    // refreshCurrentUser
+    builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
+      state.categories = payload.user.categories;
     });
   },
 });

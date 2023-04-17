@@ -9,11 +9,13 @@ import Button from "../Button";
 import { SelectField } from "../SelectField";
 import { CloseIcon, CalendarIcon } from "../../../icons";
 
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import {
   addTransaction,
   fetchAllTransactions,
 } from "../../../redux/actions/transactions-operations";
+import { categoriesSelector } from "../../../redux/selectors/transactions-selectors";
+import { mapCategoriesForSelect } from "../../../services/common/mapCategoriesForSelect";
 import "./styles.scss";
 
 interface AddTransactionModalProps {
@@ -26,19 +28,14 @@ type FormValues = {
   date: Date;
   comment: string;
 };
-
-// TEST DATA
-const testOptions = [
-  { value: "one", label: "One" },
-  { value: "two", label: "Two" },
-  { value: "three", label: "Three" },
-];
-
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
   closeModal,
 }) => {
   const [type, setType] = useState<"incoming" | "spending">("spending");
   const dispatch = useAppDispatch();
+  const categories = useAppSelector(categoriesSelector);
+
+  const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
   const initialValues: FormValues = {
     category: "",
@@ -86,7 +83,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
               <SelectField
                 required
                 name="category"
-                options={testOptions}
+                options={categoriesForSelect}
                 placeholder="Select category"
                 classNamePrefix="add-modal__field__select"
                 openMenuOnFocus

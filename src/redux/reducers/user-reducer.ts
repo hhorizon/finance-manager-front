@@ -10,7 +10,7 @@ import { fetchAllTransactions } from "../actions/transactions-operations";
 import { User } from "../../types";
 
 type UserState = {
-  user: User;
+  user: Omit<User, "categories">;
   isUserLoading: boolean;
 };
 

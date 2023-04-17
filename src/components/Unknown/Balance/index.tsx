@@ -12,32 +12,34 @@ const Balance: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
 
-  if (user.balance)
+  if (user.balance === null)
     return (
-      <div className="balance">
-        <p className="balance__title">Balance</p>
-        <p className="balance__quantity">{user.balance}</p>
-      </div>
+      <label className="balance__add">
+        <input
+          type="number"
+          step={0.5}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Add your balance to start"
+          className="balance__add__input"
+        />
+
+        {Number(inputValue) !== 0 && (
+          <button
+            className="balance__add__button"
+            onClick={() => dispatch(updateBalance(Number(inputValue)))}
+          >
+            <ArrowDownIcon />
+          </button>
+        )}
+      </label>
     );
 
   return (
-    <label className="balance__add">
-      <input
-        type="number"
-        step={0.5}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Add your balance to start"
-        className="balance__add__input"
-      />
-
-      <button
-        className="balance__add__button"
-        onClick={() => dispatch(updateBalance(Number(inputValue)))}
-      >
-        <ArrowDownIcon />
-      </button>
-    </label>
+    <div className="balance">
+      <p className="balance__title">Balance</p>
+      <p className="balance__quantity">{user.balance}</p>
+    </div>
   );
 };
 
