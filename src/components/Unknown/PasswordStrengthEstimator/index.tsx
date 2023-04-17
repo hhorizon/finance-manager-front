@@ -5,12 +5,10 @@ import "./styles.scss";
 
 interface PasswordStrengthEstimatorProps {
   password: string;
-  className?: string;
 }
 
 const PasswordStrengthEstimator: React.FC<PasswordStrengthEstimatorProps> = ({
   password,
-  className,
 }) => {
   const testResult = zxcvbn(password);
   const width = (testResult.score * 100) / 4;
@@ -36,6 +34,7 @@ const PasswordStrengthEstimator: React.FC<PasswordStrengthEstimatorProps> = ({
     width: `${width}%`,
     background: funcProgressColor(),
   });
+
   return (
     <div className="progress__background">
       <div className="progress__bar" style={changePasswordColor()}></div>
