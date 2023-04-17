@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import Logo from "../../Unknown/Logo";
-import { EyeIcon, EmailIcon, LockIcon } from "../../../icons";
+import { EyeIcon, EmailIcon, LockIcon } from "../../Unknown/Icons";
 
-import validate, { LoginFormValues } from "./validation";
+import validate from "./validation";
+import { LoginFormValues } from "../../../types";
 import "./styles.scss";
 
 interface RegistrationFormProps {

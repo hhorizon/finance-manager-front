@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 import { RootState } from "../store";
-import { notification } from "../../services/common/notification";
+import { notification } from "../../utils/createNotification";
 import {
   RegistrationCredential,
   LoginCredential,
@@ -77,7 +77,6 @@ export const refreshCurrentUser = createAsyncThunk<
     }
 
     const { data } = await axios.get<RefreshCurrentResponse>("/auth/current");
-    console.log(data.payload);
     return data.payload;
   } catch (error) {
     return thunkAPI.rejectWithValue(null);

@@ -4,9 +4,9 @@ import Container from "../../Unknown/Container";
 import LoginForm from "../LoginForm";
 import loginImage from "../../../assets/img/login-page-img.png";
 
-import { LoginFormValues } from "../LoginForm/validation";
 import { useAppDispatch } from "../../../redux/hooks";
 import { signIn } from "../../../redux/actions/auth-operations";
+import { LoginFormValues } from "../../../types";
 import "./styles.scss";
 
 const LoginPage: React.FC = () => {
@@ -14,12 +14,7 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = (values: LoginFormValues) => {
     const { email, password } = values;
-    try {
-      dispatch(signIn({ email, password }));
-    } catch (error) {
-      // TODO add notification
-      console.log(error);
-    }
+    dispatch(signIn({ email, password }));
   };
 
   return (

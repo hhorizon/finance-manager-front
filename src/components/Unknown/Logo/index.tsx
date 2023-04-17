@@ -1,5 +1,5 @@
 import React from "react";
-import { WalletIcon } from "../../../icons";
+import { WalletIcon } from "../Icons";
 import "./styles.scss";
 
 const Logo: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Logo from "../Logo";
-import { ExitIcon } from "../../../icons";
+import { ExitIcon } from "../Icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { signOut } from "../../../redux/actions/auth-operations";

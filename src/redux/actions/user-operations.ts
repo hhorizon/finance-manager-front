@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-import { notification } from "../../services/common/notification";
+import { notification } from "../../utils/createNotification";
 import { UpdateBalanceResponse, UpdateBalanceData } from "../../types";
 
 export const updateBalance = createAsyncThunk<UpdateBalanceData, number>(

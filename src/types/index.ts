@@ -29,6 +29,18 @@ export type PrivateBankCurrency = {
   sale: string;
 };
 
+export type RegistrationFormValues = {
+  email: string;
+  password: string;
+  repeatedPassword: string;
+  name: string;
+};
+
+export type LoginFormValues = {
+  email: string;
+  password: string;
+};
+
 // Axios types
 // // registration
 export type RegistrationCredential = {

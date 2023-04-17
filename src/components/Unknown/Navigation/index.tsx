@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-import { HomeIcon, StatisticsIcon, CurrencyIcon } from "../../../icons";
+import { HomeIcon, StatisticsIcon, CurrencyIcon } from "../Icons";
 
 import "./styles.scss";
 

@@ -9,7 +9,7 @@ import ModalContainer from "../../Unknown/ModalContainer";
 import TransactionListMobile from "../TransactionListMobile";
 import TransactionListDesktop from "../TransactionListDesktop";
 
-import { PlusIcon } from "../../../icons";
+import { PlusIcon } from "../../Unknown/Icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {

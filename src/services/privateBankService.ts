@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PrivateBankCurrency } from "../../types";
+import { PrivateBankCurrency } from "../types";
 
 type GetCurrencyResponse = {
   currency: PrivateBankCurrency[];

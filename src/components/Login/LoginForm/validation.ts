@@ -1,9 +1,5 @@
 import { FormikErrors } from "formik";
-
-export type LoginFormValues = {
-  email: string;
-  password: string;
-};
+import { LoginFormValues } from "../../../types";
 
 const validate = (values: LoginFormValues) => {
   const errors: FormikErrors<LoginFormValues> = {};

@@ -7,7 +7,7 @@ import "react-datetime/css/react-datetime.css";
 import Toggle from "../Toggle";
 import Button from "../Button";
 import { SelectField } from "../SelectField";
-import { CloseIcon, CalendarIcon } from "../../../icons";
+import { CloseIcon, CalendarIcon } from "../Icons";
 
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import {
@@ -15,7 +15,7 @@ import {
   fetchAllTransactions,
 } from "../../../redux/actions/transactions-operations";
 import { categoriesSelector } from "../../../redux/selectors/transactions-selectors";
-import { mapCategoriesForSelect } from "../../../services/common/mapCategoriesForSelect";
+import { mapCategoriesForSelect } from "../../../utils/mapCategoriesForSelect";
 import "./styles.scss";
 
 interface AddTransactionModalProps {

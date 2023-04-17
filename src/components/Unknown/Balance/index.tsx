@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ArrowDownIcon } from "../../../icons";
+import { ArrowDownIcon } from "../Icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { updateBalance } from "../../../redux/actions/user-operations";

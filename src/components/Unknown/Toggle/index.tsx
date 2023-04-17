@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { PlusIcon, MinusIcon } from "../../../icons";
+import { PlusIcon, MinusIcon } from "../Icons";
 import "./styles.scss";
 
 interface ToggleProps {

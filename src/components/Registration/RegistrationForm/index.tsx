@@ -4,9 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import PasswordStrengthEstimator from "../../Unknown/PasswordStrengthEstimator";
 import Logo from "../../Unknown/Logo";
-import { EyeIcon, EmailIcon, LockIcon, AccountIcon } from "../../../icons";
+import { EyeIcon, EmailIcon, LockIcon, AccountIcon } from "../../Unknown/Icons";
 
-import validate, { RegistrationFormValues } from "./validation";
+import validate from "./validation";
+import { RegistrationFormValues } from "../../../types";
 import "./styles.scss";
 
 interface RegistrationFormProps {
