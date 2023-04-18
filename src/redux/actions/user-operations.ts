@@ -5,7 +5,7 @@ import { notification } from "../../utils/createNotification";
 import { UpdateBalanceResponse, UpdateBalanceData } from "../../types";
 
 export const updateBalance = createAsyncThunk<UpdateBalanceData, number>(
-  "user/registration",
+  "user/updateBalance",
   async (newBalance, thunkAPI) => {
     try {
       const { data } = await axios.patch<UpdateBalanceResponse>(

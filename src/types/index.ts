@@ -19,7 +19,7 @@ export type User = {
   email: string | null;
   balance: number | null;
   subscription: string | null;
-  categories: Categories;
+  // categories: Categories;
 };
 
 export type PrivateBankCurrency = {
@@ -72,16 +72,16 @@ export type LoginResponse = {
 };
 
 // // current
-export type RefreshCurrentData = {
+export type RefreshCurrentResponsData = {
   user: User;
 };
 
 export type RefreshCurrentResponse = {
-  payload: RefreshCurrentData;
+  payload: RefreshCurrentResponsData;
 };
 
 // // get all transactions
-export type AllTransactionsData = {
+export type AllTransactions = {
   hasNextPage: boolean;
   hasPrevPage: boolean;
   limit: number;
@@ -90,7 +90,12 @@ export type AllTransactionsData = {
   totalTransaction: number;
   transactions: Transaction[];
   nextPage: number | null;
-  balance: number;
+};
+
+export type AllTransactionsData = {
+  transactions: AllTransactions;
+  balance: number | null;
+  categories: Categories;
 };
 
 export type AllTransactionsResponse = {

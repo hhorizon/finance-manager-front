@@ -105,3 +105,10 @@ export const deleteTransaction = createAsyncThunk<
     return thunkAPI.rejectWithValue(null);
   }
 });
+
+// export const getStatistics=
+// // ////////////////////////
+// const { data: qwe } = await axios.get(
+//   `/statistics?startDate=2023-04-01T00:00:00&endDate=2023-04-02T23:59:59`,
+// );
+// console.log(qwe);

@@ -12,7 +12,6 @@ import {
 import storage from "redux-persist/lib/storage";
 import thunkMiddleware from "redux-thunk";
 
-import commonReducer from "./reducers/common-reducer";
 import authReducer from "./reducers/auth-reducer";
 import userReducer from "./reducers/user-reducer";
 import transactionsReducer from "./reducers/transactions-reducer";
@@ -24,7 +23,6 @@ const authPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  common: commonReducer,
   auth: persistReducer(authPersistConfig, authReducer),
   user: userReducer,
   transactions: transactionsReducer,

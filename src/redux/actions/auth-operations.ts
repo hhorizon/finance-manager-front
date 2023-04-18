@@ -9,7 +9,7 @@ import {
   LoginResponse,
   LoginResponseData,
   RefreshCurrentResponse,
-  RefreshCurrentData,
+  RefreshCurrentResponsData,
 } from "../../types";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
@@ -64,7 +64,7 @@ export const signIn = createAsyncThunk<LoginResponseData, LoginCredential>(
 );
 
 export const refreshCurrentUser = createAsyncThunk<
-  RefreshCurrentData,
+  RefreshCurrentResponsData,
   void,
   { state: RootState }
 >("auth/refreshCurrentUser", async (_, thunkAPI) => {
@@ -77,6 +77,7 @@ export const refreshCurrentUser = createAsyncThunk<
     }
 
     const { data } = await axios.get<RefreshCurrentResponse>("/auth/current");
+
     return data.payload;
   } catch (error) {
     return thunkAPI.rejectWithValue(null);

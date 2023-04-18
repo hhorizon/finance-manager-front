@@ -26,7 +26,7 @@ const validate = (values: RegistrationFormValues) => {
 
   if (!name) {
     errors.name = "Required field";
-  } else if (name.length >= 20) {
+  } else if (name.length >= 15) {
     errors.name = "Must be 20 characters or less";
   } else if (name.length < 3) {
     errors.name = "Must be 3 characters or more";

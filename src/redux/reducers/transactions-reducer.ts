@@ -5,11 +5,10 @@ import {
   updateTransaction,
   fetchNextPage,
 } from "../actions/transactions-operations";
-import { signIn, refreshCurrentUser } from "../actions/auth-operations";
-import { AllTransactionsData, Categories } from "../../types";
+import { AllTransactions, Categories } from "../../types";
 
 type TransactionsState = {
-  allTransition: Omit<AllTransactionsData, "balance">;
+  allTransition: AllTransactions;
   categories: Categories;
   isTransactionsLoading: boolean;
 };
@@ -39,7 +38,8 @@ const transactionsSlice = createSlice({
       state.isTransactionsLoading = true;
     });
     builder.addCase(fetchAllTransactions.fulfilled, (state, { payload }) => {
-      state.allTransition = payload;
+      state.allTransition = payload.transactions;
+      state.categories = payload.categories;
       state.isTransactionsLoading = false;
     });
     builder.addCase(fetchAllTransactions.rejected, (state) => {
@@ -61,7 +61,7 @@ const transactionsSlice = createSlice({
     builder.addCase(updateTransaction.pending, (state) => {
       state.isTransactionsLoading = true;
     });
-    builder.addCase(updateTransaction.fulfilled, (state, { payload }) => {
+    builder.addCase(updateTransaction.fulfilled, (state) => {
       state.isTransactionsLoading = false;
     });
     builder.addCase(updateTransaction.rejected, (state) => {
@@ -74,25 +74,15 @@ const transactionsSlice = createSlice({
     });
     builder.addCase(fetchNextPage.fulfilled, (state, { payload }) => {
       state.allTransition = {
-        ...payload,
+        ...payload.transactions,
         transactions: [
           ...state.allTransition.transactions,
-          ...payload.transactions,
+          ...payload.transactions.transactions,
         ],
       };
     });
     builder.addCase(fetchNextPage.rejected, (state) => {
       state.isTransactionsLoading = false;
-    });
-
-    // signIn
-    builder.addCase(signIn.fulfilled, (state, { payload }) => {
-      state.categories = payload.user.categories;
-    });
-
-    // refreshCurrentUser
-    builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
-      state.categories = payload.user.categories;
     });
   },
 });

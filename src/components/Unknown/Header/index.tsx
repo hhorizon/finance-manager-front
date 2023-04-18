@@ -32,6 +32,7 @@ const Header: React.FC = () => {
           <p className="header__user-menu__name">{user.name}</p>
 
           <button
+            title="Exit"
             className="header__user-menu__exit-button"
             onClick={() => onExit()}
           >

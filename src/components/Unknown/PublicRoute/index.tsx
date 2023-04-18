@@ -5,7 +5,7 @@ import Loader from "../Loader";
 
 import { useAppSelector } from "../../../redux/hooks";
 import { isAuthLoadingSelector } from "../../../redux/selectors/auth-selectors";
-import { userSelector } from "../../../redux/selectors/user-selectors";
+import { isUserloggedInSelector } from "../../../redux/selectors/auth-selectors";
 
 interface PublicRouteProps {
   children: React.ReactNode;
@@ -13,14 +13,14 @@ interface PublicRouteProps {
 
 const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
   const navigate = useNavigate();
-  const user = useAppSelector(userSelector);
+  const isUserloggedIn = useAppSelector(isUserloggedInSelector);
   const isAuthLoading = useAppSelector(isAuthLoadingSelector);
 
   useEffect(() => {
-    if (user.email) {
+    if (isUserloggedIn) {
       navigate("/");
     }
-  }, [navigate, user.email]);
+  }, [navigate, isUserloggedIn]);
 
   if (isAuthLoading) return <Loader />;
 

@@ -10,7 +10,7 @@ import { fetchAllTransactions } from "../actions/transactions-operations";
 import { User } from "../../types";
 
 type UserState = {
-  user: Omit<User, "categories">;
+  user: User;
   isUserLoading: boolean;
 };
 
@@ -40,19 +40,19 @@ const userSlice = createSlice({
     });
 
     // signOut
-    builder.addCase(signOut.fulfilled, (state, { payload }) => {
+    builder.addCase(signOut.fulfilled, (state) => {
       state.user = initialState.user;
     });
 
     // updateBalance
-    builder.addCase(updateBalance.pending, (state, { payload }) => {
+    builder.addCase(updateBalance.pending, (state) => {
       state.isUserLoading = true;
     });
     builder.addCase(updateBalance.fulfilled, (state, { payload }) => {
       state.user.balance = payload.balance;
       state.isUserLoading = false;
     });
-    builder.addCase(updateBalance.rejected, (state, { payload }) => {
+    builder.addCase(updateBalance.rejected, (state) => {
       state.isUserLoading = false;
     });
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import Container from "../../Unknown/Container";
@@ -13,16 +13,6 @@ import TransactionListDesktop from "../TransactionListDesktop";
 import { PlusIcon } from "../../Unknown/Icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import {
-  openAddModal,
-  closeAddModal,
-  openDeleteModal,
-  closeDeleteModal,
-} from "../../../redux/actions/common-actions";
-import {
-  isAddModalOpenSelector,
-  isDeleteModalOpenSelector,
-} from "../../../redux/selectors/common-selectors";
 import {
   fetchAllTransactions,
   fetchNextPage,
@@ -40,12 +30,12 @@ import "./styles.scss";
 const HomePage: React.FC = () => {
   const [selectedTransaction, setSelectedTransaction] =
     useState<Transaction | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const dispatch = useAppDispatch();
-  const isAddModalOpen = useAppSelector(isAddModalOpenSelector);
-  const isDeleteModalOpen = useAppSelector(isDeleteModalOpenSelector);
   const user = useAppSelector(userSelector);
   const categories = useAppSelector(categoriesSelector);
-  const { transactions, page, totalPages, nextPage } = useAppSelector(
+  const { transactions, totalPages, nextPage } = useAppSelector(
     allTransactionsSelector,
   );
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -74,7 +64,12 @@ const HomePage: React.FC = () => {
     await dispatch(deleteTransaction(transactionId));
     await dispatch(fetchAllTransactions(1));
     setSelectedTransaction(null);
+    setShowDeleteModal(false);
   };
+
+  useEffect(() => {
+    dispatch(fetchAllTransactions(1));
+  }, [dispatch]);
 
   return (
     <>
@@ -85,7 +80,7 @@ const HomePage: React.FC = () => {
             <Sidebar />
           </div>
 
-          {transactions.length !== 0 && (
+          {transactions && (
             <div className="home-page__trasactions-list-wrapper">
               {isMobile ? (
                 <TransactionListMobile
@@ -95,19 +90,18 @@ const HomePage: React.FC = () => {
                   setSelectedTransaction={setSelectedTransaction}
                   onBottomScroll={fetchNextPageOnScroll}
                   onUpdate={handleUpdateTransaction}
-                  onDelete={() => dispatch(openDeleteModal())}
+                  onDelete={() => setShowDeleteModal(true)}
                 />
               ) : (
                 <TransactionListDesktop
                   transactions={transactions}
-                  currentPage={page}
                   totalPages={totalPages}
                   categories={categories}
                   selectedTransaction={selectedTransaction}
                   setSelectedTransaction={setSelectedTransaction}
                   onPaginationChange={fetchNextPageOnPaginationChange}
                   onUpdate={handleUpdateTransaction}
-                  onDelete={() => dispatch(openDeleteModal())}
+                  onDelete={() => setShowDeleteModal(true)}
                 />
               )}
             </div>
@@ -118,23 +112,23 @@ const HomePage: React.FC = () => {
       {showAddModalButton && (
         <button
           className="add-transaction-button"
-          onClick={() => dispatch(openAddModal())}
+          onClick={() => setShowAddModal(true)}
         >
           <PlusIcon />
         </button>
       )}
 
-      {isAddModalOpen && (
-        <ModalContainer closeModal={() => dispatch(closeAddModal())}>
-          <AddTransactionModal closeModal={() => dispatch(closeAddModal())} />
+      {showAddModal && (
+        <ModalContainer closeModal={() => setShowAddModal(false)}>
+          <AddTransactionModal closeModal={() => setShowAddModal(false)} />
         </ModalContainer>
       )}
 
-      {isDeleteModalOpen && selectedTransaction && (
-        <ModalContainer closeModal={() => dispatch(closeDeleteModal())}>
+      {showDeleteModal && selectedTransaction && (
+        <ModalContainer closeModal={() => setShowDeleteModal(false)}>
           <DeleteTransactionModal
             text="Do you want to delete this transaction?"
-            closeModal={() => dispatch(closeDeleteModal())}
+            closeModal={() => setShowDeleteModal(false)}
             onSubmit={() => handleDeleteTransaction(selectedTransaction._id)}
           />
         </ModalContainer>

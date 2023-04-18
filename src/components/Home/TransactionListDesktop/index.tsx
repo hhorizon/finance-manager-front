@@ -14,7 +14,6 @@ import "./styles.scss";
 
 interface TransactionListDesktopProps {
   transactions: Transaction[];
-  currentPage: number;
   totalPages: number;
   categories: Categories;
   selectedTransaction: Transaction | null;
@@ -26,7 +25,6 @@ interface TransactionListDesktopProps {
 
 const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
   transactions,
-  currentPage,
   totalPages,
   categories,
   selectedTransaction,
@@ -44,6 +42,12 @@ const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
         <div className="trans-list-desktop__head__name">Amount</div>
         <div className="trans-list-desktop__head__name">Balance</div>
       </div>
+
+      {transactions.length === 0 && (
+        <div className="trans-list-desktop__empty-message">
+          The transaction list is empty
+        </div>
+      )}
 
       <ul className="trans-list-desktop__body">
         {transactions.map((transaction) =>
@@ -89,7 +93,6 @@ const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
       {totalPages !== 1 && (
         <div className="trans-list-desktop__pagination">
           <Pagination
-            currentPage={currentPage}
             totalPages={totalPages}
             onPaginationChange={onPaginationChange}
           />

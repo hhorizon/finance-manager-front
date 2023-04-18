@@ -30,12 +30,6 @@ const TransactionListMobile: React.FC<TransactionListMobileProps> = ({
   onUpdate,
   onDelete,
 }) => {
-  const getItemColorClass = (transaction: Transaction) =>
-    `trans-list-mobile__item--${transaction.type}`;
-
-  const getAmountColorClass = (transaction: Transaction) =>
-    `trans-list-mobile__item__field__value--${transaction.type}`;
-
   const onScroll = useCallback(() => {
     const isBottom =
       Math.ceil(window.innerHeight + window.scrollY) >=
@@ -50,6 +44,13 @@ const TransactionListMobile: React.FC<TransactionListMobileProps> = ({
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, [onScroll]);
+
+  if (transactions.length === 0)
+    return (
+      <div className="trans-list-mobile__empty-message">
+        The transaction list is empty
+      </div>
+    );
 
   return (
     <ul className="trans-list-mobile">
@@ -66,9 +67,7 @@ const TransactionListMobile: React.FC<TransactionListMobileProps> = ({
         ) : (
           <li
             key={transaction._id}
-            className={`trans-list-mobile__item ${getItemColorClass(
-              transaction,
-            )}`}
+            className={`trans-list-mobile__item trans-list-mobile__item--${transaction.type}`}
             onClick={() => setSelectedTransaction(transaction)}
           >
             <div className="trans-list-mobile__item__field">
@@ -92,9 +91,7 @@ const TransactionListMobile: React.FC<TransactionListMobileProps> = ({
             <div className="trans-list-mobile__item__field">
               <p className="trans-list-mobile__item__field__name">Amount</p>
               <p
-                className={`trans-list-mobile__item__field__value ${getAmountColorClass(
-                  transaction,
-                )}`}
+                className={`trans-list-mobile__item__field__value trans-list-mobile__item__field__value--${transaction.type}`}
               >
                 {normalizeAmount(transaction.sum)}
               </p>

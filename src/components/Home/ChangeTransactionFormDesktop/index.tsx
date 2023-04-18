@@ -73,7 +73,7 @@ const ChangeTransactionFormDesktop: React.FC<
   return (
     <li className="change-trans-desktop__item">
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {({ values, setFieldValue }) => (
+        {({ values, dirty, setFieldValue }) => (
           <Form className="change-trans-desktop__form">
             <div className="change-trans-desktop__field change-trans-desktop__field--center">
               <Field name="date">
@@ -126,6 +126,16 @@ const ChangeTransactionFormDesktop: React.FC<
             </div>
 
             <div className="change-trans-desktop__buttons-wrapper">
+              {dirty && (
+                <button
+                  type="submit"
+                  title="Save"
+                  className="change-trans-desktop__button"
+                >
+                  <SaveIcon />
+                </button>
+              )}
+
               <button
                 type="button"
                 title="Delete"
@@ -133,14 +143,6 @@ const ChangeTransactionFormDesktop: React.FC<
                 onClick={() => onDelete(_id)}
               >
                 <DeleteIcon />
-              </button>
-
-              <button
-                type="submit"
-                title="Save"
-                className="change-trans-desktop__button"
-              >
-                <SaveIcon />
               </button>
             </div>
           </Form>

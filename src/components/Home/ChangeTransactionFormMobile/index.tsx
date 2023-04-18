@@ -59,7 +59,7 @@ const ChangeTransactionFormMobile: React.FC<
       className={`change-trans-mobile__item change-trans-mobile__item--${transaction.type}`}
     >
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {({ values, setFieldValue }) => (
+        {({ values, dirty, setFieldValue }) => (
           <Form className="change-trans-mobile__form">
             <div className="change-trans-mobile__field ">
               <div className="change-trans-mobile__field__name">Date</div>
@@ -122,6 +122,16 @@ const ChangeTransactionFormMobile: React.FC<
             </div>
 
             <div className="change-trans-mobile__buttons-wrapper">
+              {dirty && (
+                <button
+                  type="submit"
+                  title="Save"
+                  className="change-trans-mobile__button"
+                >
+                  <SaveIcon />
+                </button>
+              )}
+
               <button
                 type="button"
                 title="Delete"
@@ -129,14 +139,6 @@ const ChangeTransactionFormMobile: React.FC<
                 onClick={() => onDelete(_id)}
               >
                 <DeleteIcon />
-              </button>
-
-              <button
-                type="submit"
-                title="Save"
-                className="change-trans-mobile__button"
-              >
-                <SaveIcon />
               </button>
             </div>
           </Form>

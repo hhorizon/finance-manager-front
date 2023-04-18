@@ -13,19 +13,12 @@ import Loader from "./components/Unknown/Loader";
 
 import { useAppDispatch } from "./redux/hooks";
 import { refreshCurrentUser } from "./redux/actions/auth-operations";
-import { fetchAllTransactions } from "./redux/actions/transactions-operations";
 
 function App() {
   const dispatch = useAppDispatch();
 
   const refreshCurrentUserLoader = async () => {
     await dispatch(refreshCurrentUser());
-
-    return null;
-  };
-
-  const fetchAllTransactionsLoader = async () => {
-    await dispatch(fetchAllTransactions(1));
 
     return null;
   };
@@ -43,7 +36,6 @@ function App() {
               <HomePage />
             </PrivateRoute>
           ),
-          loader: fetchAllTransactionsLoader,
         },
         {
           path: "/registration",
