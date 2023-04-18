@@ -68,8 +68,8 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchAllTransactions(1));
-  }, [dispatch]);
+    user.balance && dispatch(fetchAllTransactions(1));
+  }, [dispatch, user.balance]);
 
   return (
     <>
