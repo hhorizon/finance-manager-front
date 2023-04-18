@@ -2,6 +2,7 @@ import React from "react";
 
 // import { getCurrency } from "../../../services/privateBankService";
 // import { PrivateBankCurrency } from "../../../types";
+import { normalizeAmount } from "../../../utils";
 import "./styles.scss";
 
 import { currency } from "./mockData";
@@ -29,8 +30,12 @@ const CurrencyTab: React.FC = () => {
           currency.map((curr) => (
             <ul key={curr.ccy} className="currency__body__row">
               <li className="currency__body__item">{curr.ccy}</li>
-              <li className="currency__body__item">{curr.buy}</li>
-              <li className="currency__body__item">{curr.sale}</li>
+              <li className="currency__body__item">
+                {normalizeAmount(Number(curr.buy))}
+              </li>
+              <li className="currency__body__item">
+                {normalizeAmount(Number(curr.sale))}
+              </li>
             </ul>
           ))
         ) : (

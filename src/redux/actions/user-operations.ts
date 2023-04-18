@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-import { notification } from "../../utils/createNotification";
+import { createNotification } from "../../utils";
 import { UpdateBalanceResponse, UpdateBalanceData } from "../../types";
 
 export const updateBalance = createAsyncThunk<UpdateBalanceData, number>(
@@ -18,7 +18,7 @@ export const updateBalance = createAsyncThunk<UpdateBalanceData, number>(
       return data.payload;
     } catch (error) {
       if (error instanceof AxiosError)
-        notification(error.response?.data.message, "error");
+        createNotification(error.response?.data.message, "error");
 
       return thunkAPI.rejectWithValue(null);
     }

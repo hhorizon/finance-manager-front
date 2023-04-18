@@ -33,7 +33,7 @@
 
   &__body {
     padding: 10px 10px;
-    height: 112px;
+    height: 150px;
     background-color: var(--main-color);
     background-image: url("../../../assets/img/currency-bg.png");
     background-size: cover;
@@ -44,7 +44,7 @@
     @media (min-width: 1280px) {
       column-gap: 28px;
       padding: 10px 20px;
-      height: 278px;
+      height: 200px;
       background-size: contain;
     }
 

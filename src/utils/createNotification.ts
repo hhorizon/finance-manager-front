@@ -6,7 +6,7 @@ type Notification = (
   autoClose?: number,
 ) => Id;
 
-export const notification: Notification = (
+export const createNotification: Notification = (
   text,
   type = "info",
   autoClose = 5000,

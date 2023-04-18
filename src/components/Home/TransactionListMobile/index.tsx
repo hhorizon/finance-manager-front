@@ -3,7 +3,7 @@ import moment from "moment";
 
 import ChangeTransactionFormMobile from "../ChangeTransactionFormMobile";
 
-import { normalizeAmount } from "../../../utils/normalizeAmount";
+import { normalizeAmount } from "../../../utils";
 import {
   Transaction,
   AddTransactionRequestBody,

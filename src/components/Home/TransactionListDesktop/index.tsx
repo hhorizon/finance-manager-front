@@ -4,7 +4,7 @@ import moment from "moment";
 import ChangeTransactionFormDesktop from "../ChangeTransactionFormDesktop";
 import Pagination from "../../Unknown/Pagination";
 
-import { normalizeAmount } from "../../../utils/normalizeAmount";
+import { normalizeAmount } from "../../../utils";
 import {
   Transaction,
   AddTransactionRequestBody,

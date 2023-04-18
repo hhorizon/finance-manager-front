@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 import { RootState } from "../store";
-import { notification } from "../../utils/createNotification";
+import { createNotification } from "../../utils";
 import {
   AllTransactionsResponse,
   AllTransactionsData,
@@ -24,7 +24,7 @@ export const fetchAllTransactions = createAsyncThunk<
     return data.payload;
   } catch (error) {
     if (error instanceof AxiosError)
-      notification(error.response?.data.message, "error");
+      createNotification(error.response?.data.message, "error");
 
     return thunkAPI.rejectWithValue(null);
   }
@@ -41,7 +41,7 @@ export const fetchNextPage = createAsyncThunk<AllTransactionsData, number>(
       return data.payload;
     } catch (error) {
       if (error instanceof AxiosError)
-        notification(error.response?.data.message, "error");
+        createNotification(error.response?.data.message, "error");
 
       return thunkAPI.rejectWithValue(null);
     }
@@ -54,10 +54,10 @@ export const addTransaction = createAsyncThunk<void, AddTransactionRequestBody>(
     try {
       await axios.post<AddTransactionResponse>("/transactions", body);
 
-      notification("Transaction added", "success", 1000);
+      createNotification("Transaction added", "success", 1000);
     } catch (error) {
       if (error instanceof AxiosError)
-        notification(error.response?.data.message, "error");
+        createNotification(error.response?.data.message, "error");
 
       return thunkAPI.rejectWithValue(null);
     }
@@ -77,10 +77,10 @@ export const updateTransaction = createAsyncThunk<
         body,
       );
 
-      notification("Saved", "info", 1000);
+      createNotification("Saved", "info", 1000);
     } catch (error) {
       if (error instanceof AxiosError)
-        notification(error.response?.data.message, "error");
+        createNotification(error.response?.data.message, "error");
 
       return thunkAPI.rejectWithValue(null);
     }
@@ -97,10 +97,10 @@ export const deleteTransaction = createAsyncThunk<
       `/transactions/${transactionId}`,
     );
 
-    notification("Transaction deleted", "info", 1000);
+    createNotification("Transaction deleted", "info", 1000);
   } catch (error) {
     if (error instanceof AxiosError)
-      notification(error.response?.data.message, "error");
+      createNotification(error.response?.data.message, "error");
 
     return thunkAPI.rejectWithValue(null);
   }

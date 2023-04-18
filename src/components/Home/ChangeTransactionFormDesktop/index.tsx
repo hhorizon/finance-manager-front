@@ -6,7 +6,7 @@ import moment from "moment";
 import { SelectField } from "../../Unknown/SelectField";
 import { SaveIcon, DeleteIcon } from "../../Unknown/Icons";
 
-import { mapCategoriesForSelect } from "../../../utils/mapCategoriesForSelect";
+import { mapCategoriesForSelect } from "../../../utils";
 import {
   Transaction,
   AddTransactionRequestBody,

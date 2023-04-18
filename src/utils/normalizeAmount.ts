@@ -1,3 +1,3 @@
 export const normalizeAmount = (amount: number) => {
-  return amount.toString().replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ");
+  return amount.toFixed(2).replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ");
 };

@@ -5,7 +5,7 @@ import { ArrowDownIcon } from "../Icons";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { updateBalance } from "../../../redux/actions/user-operations";
 import { userSelector } from "../../../redux/selectors/user-selectors";
-import { normalizeAmount } from "../../../utils/normalizeAmount";
+import { normalizeAmount } from "../../../utils";
 import "./styles.scss";
 
 const Balance: React.FC = () => {
@@ -59,6 +59,7 @@ const Balance: React.FC = () => {
             <>
               <input
                 type="number"
+                step={0.5}
                 value={inputChangeValue}
                 onChange={(e) => setChangeInputValue(e.target.value)}
                 className="balance__change__input"

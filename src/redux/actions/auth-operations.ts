@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 import { RootState } from "../store";
-import { notification } from "../../utils/createNotification";
+import { createNotification } from "../../utils";
 import {
   RegistrationCredential,
   LoginCredential,
@@ -29,13 +29,13 @@ export const signUp = createAsyncThunk<void, RegistrationCredential>(
     try {
       await axios.post("/auth/signup", credentials);
 
-      notification(
+      createNotification(
         "Successful registration. Confirm your email to join",
         "success",
       );
     } catch (error) {
       if (error instanceof AxiosError)
-        notification(error.response?.data.message, "error");
+        createNotification(error.response?.data.message, "error");
 
       return thunkAPI.rejectWithValue(null);
     }
@@ -56,7 +56,7 @@ export const signIn = createAsyncThunk<LoginResponseData, LoginCredential>(
       return data.payload;
     } catch (error) {
       if (error instanceof AxiosError)
-        notification(error.response?.data.message, "error");
+        createNotification(error.response?.data.message, "error");
 
       return thunkAPI.rejectWithValue(null);
     }
@@ -93,7 +93,7 @@ export const signOut = createAsyncThunk("auth/signOut", async (_, thunkAPI) => {
     token.unSet();
   } catch (error) {
     if (error instanceof AxiosError)
-      notification(error.response?.data.message, "error");
+      createNotification(error.response?.data.message, "error");
 
     return thunkAPI.rejectWithValue(null);
   }

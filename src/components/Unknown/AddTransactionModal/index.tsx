@@ -15,7 +15,7 @@ import {
   fetchAllTransactions,
 } from "../../../redux/actions/transactions-operations";
 import { categoriesSelector } from "../../../redux/selectors/transactions-selectors";
-import { mapCategoriesForSelect } from "../../../utils/mapCategoriesForSelect";
+import { mapCategoriesForSelect } from "../../../utils";
 import { AddFormValues } from "../../../types";
 import "./styles.scss";
 
