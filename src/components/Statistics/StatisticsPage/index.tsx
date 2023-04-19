@@ -21,7 +21,6 @@ const StatisticsPage: React.FC = () => {
   const user = useAppSelector(userSelector);
   const isUserloggedIn = useAppSelector(isUserloggedInSelector);
   const statistics = useAppSelector(statisticsSelector);
-  console.log(period);
 
   useEffect(() => {
     isUserloggedIn && dispatch(fetchStatistics(period));

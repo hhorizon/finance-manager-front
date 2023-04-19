@@ -18,7 +18,6 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
   const [selectedYear, setSelectedYear] = useState<number>();
 
   const { incomingStatistics, spendingStatistics } = statistics;
-
   const dateOptions = getDateOptions(2018);
 
   const changeMonth = (month?: number) => {
@@ -32,8 +31,6 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
   const changeYear = (year?: number) => {
     setSelectedYear(year);
   };
-
-  getPeriod();
 
   useEffect(() => {
     const period = getPeriod(selectedMonth, selectedYear);
