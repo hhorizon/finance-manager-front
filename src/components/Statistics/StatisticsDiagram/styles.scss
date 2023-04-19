@@ -1,0 +1,18 @@
+.statistics-diagram {
+  position: relative;
+  width: 100%;
+
+  @media (min-width: 1280px) {
+    max-width: 288px;
+  }
+
+  &__balance {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+  }
+}

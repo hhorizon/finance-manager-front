@@ -2,53 +2,74 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-import { Statistics } from "../../../types";
+import { normalizeAmount } from "../../../utils";
+import { StatisticsCategories } from "../../../types";
+import "./styles.scss";
 
 interface StatisticsDiagramProps {
-  statistics: Statistics;
+  categories: StatisticsCategories;
+  totalBalance: number | null;
 }
 
-// {
-//   Food: 10000;
-//   Home: 13;
-// }
-
 const StatisticsDiagram: React.FC<StatisticsDiagramProps> = ({
-  statistics,
+  categories,
+  totalBalance,
 }) => {
   ChartJS.register(ArcElement, Tooltip);
 
-  const { incomingStatistics, spendingStatistics } = statistics;
+  const doughnutData = categories.reduce<{
+    labels: string[];
+    sum: number[];
+    colors: string[];
+  }>(
+    (acc, category) => {
+      acc.labels.push(category.name);
+      acc.sum.push(category.sum);
+      acc.colors.push(category.color);
 
-  //   const lables = incomingStatistics.categories;
+      return acc;
+    },
+    {
+      labels: [],
+      sum: [],
+      colors: [],
+    },
+  );
 
-  //   const labels = [
-  //     ...Object.keys(incomingStatistics.categories),
-  //     ...Object.keys(spendingStatistics.categories),
-  //   ];
+  const data = {
+    labels: doughnutData.labels,
+    datasets: [
+      {
+        data: doughnutData.sum,
+        backgroundColor: doughnutData.colors,
+        borderWidth: 0,
+      },
+    ],
+  };
 
-  console.log(statistics);
-  //   console.log(labels);
-
-  const doughnutData = {
+  const emptyData = {
     labels: ["--", "--"],
     datasets: [
       {
-        label: "# of Votes",
-        data: ["50", "50"],
+        data: [50, 50],
         backgroundColor: ["#bdbdbd", "#e0e0e0"],
         borderWidth: 0,
-        cutout: "70%",
       },
     ],
   };
 
   return (
-    <div>
-      {/* <div className={s.balance}>
-        ₴ {totalBalance ? normalizeNum(totalBalance) : 0}
-      </div> */}
-      <Doughnut data={doughnutData} />
+    <div className="statistics-diagram">
+      {totalBalance && (
+        <p className="statistics-diagram__balance">
+          {normalizeAmount(totalBalance)}
+        </p>
+      )}
+
+      <Doughnut
+        data={categories.length === 0 ? emptyData : data}
+        options={{ cutout: "70%" }}
+      />
     </div>
   );
 };

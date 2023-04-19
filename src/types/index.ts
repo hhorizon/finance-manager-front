@@ -2,10 +2,11 @@ export type TransactionType = "spending" | "incoming";
 
 export type Category = { name: string; color: string };
 
-export type Categories = {
+export type CategoriesList = {
   incoming: Array<Category>;
   spending: Array<Category>;
 };
+
 export type Period = {
   startDate: string;
   endDate: string;
@@ -48,18 +49,20 @@ export type LoginFormValues = {
 };
 
 export type AddFormValues = {
-  category: string;
+  category: { name: string; color: string };
   sum: number;
   date: Date;
   comment: string;
 };
 
-export type StatisticsByCategories = {
-  categories: Array<{
-    name: string;
-    sum: number;
-    color: string;
-  }>;
+export type StatisticsCategories = Array<{
+  name: string;
+  sum: number;
+  color: string;
+}>;
+
+export type StatisticsCategoriesData = {
+  categories: StatisticsCategories;
   totalSum: number;
 };
 
@@ -110,7 +113,7 @@ export type AllTransactions = {
 export type AllTransactionsData = {
   transactions: AllTransactions;
   balance: number | null;
-  categories: Categories;
+  categories: CategoriesList;
 };
 
 export type AllTransactionsResponse = {
@@ -153,8 +156,8 @@ export type UpdateBalanceResponse = {
 
 // // get statistics
 export type Statistics = {
-  incomingStatistics: StatisticsByCategories;
-  spendingStatistics: StatisticsByCategories;
+  incomingStatistics: StatisticsCategoriesData;
+  spendingStatistics: StatisticsCategoriesData;
 };
 
 export type StatisticsData = {

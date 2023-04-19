@@ -1,28 +1,22 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import Datetime from "react-datetime";
+import Select from "react-select";
 import moment from "moment";
 
-import { SelectField } from "../../Unknown/SelectField";
 import { SaveIcon, DeleteIcon } from "../../Unknown/Icons";
 import { mapCategoriesForSelect } from "../../../utils";
 import {
   Transaction,
   AddTransactionRequestBody,
-  Categories,
+  CategoriesList,
+  AddFormValues,
 } from "../../../types";
 import "./styles.scss";
 
-type FormValues = {
-  category: string;
-  sum: number;
-  date: Date;
-  comment: string;
-};
-
 interface ChangeTransactionFormMobileProps {
   transaction: Transaction;
-  categories: Categories;
+  categories: CategoriesList;
   onUpdate: (id: string, body: AddTransactionRequestBody) => void;
   onDelete: (id: string) => void;
   setSelectedTransaction: (transaction: Transaction | null) => void;
@@ -43,18 +37,17 @@ const ChangeTransactionFormMobile: React.FC<
 
   const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
-  const initialValues: FormValues = {
-    category: category.name,
+  const initialValues: AddFormValues = {
+    category: { name: category.name, color: category.color },
     sum,
     date: new Date(date),
     comment,
   };
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: AddFormValues) => {
     onUpdate(_id, {
       type,
       ...values,
-      category: { name: values.category, color: "qweqwe" },
     });
   };
 
@@ -92,13 +85,16 @@ const ChangeTransactionFormMobile: React.FC<
             <div className="change-trans-mobile__field ">
               <div className="change-trans-mobile__field__name">Category</div>
 
-              <SelectField
+              <Select
                 required
-                name="category"
                 options={categoriesForSelect}
                 className="change-trans-mobile__field__select__container"
                 classNamePrefix="change-trans-mobile__field__select"
                 openMenuOnFocus
+                onChange={(val) => {
+                  setFieldValue("category.name", val?.label);
+                  setFieldValue("category.color", val?.value);
+                }}
               />
             </div>
 

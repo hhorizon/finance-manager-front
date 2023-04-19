@@ -6,11 +6,11 @@ import {
   fetchNextPage,
   fetchStatistics,
 } from "../actions/transactions-operations";
-import { AllTransactions, Categories, Statistics } from "../../types";
+import { AllTransactions, CategoriesList, Statistics } from "../../types";
 
 type TransactionsState = {
   allTransition: AllTransactions;
-  categories: Categories;
+  categories: CategoriesList;
   statistics: Statistics;
   isTransactionsLoading: boolean;
 };

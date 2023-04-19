@@ -14,12 +14,14 @@ import "./styles.scss";
 
 const StatisticsPage: React.FC = () => {
   const [period, setPeriod] = useState({
-    startDate: "2023-04-17",
-    endDate: "2023-04-19",
+    startDate: "",
+    endDate: "",
   });
   const dispatch = useAppDispatch();
+  const user = useAppSelector(userSelector);
   const isUserloggedIn = useAppSelector(isUserloggedInSelector);
   const statistics = useAppSelector(statisticsSelector);
+  console.log(period);
 
   useEffect(() => {
     isUserloggedIn && dispatch(fetchStatistics(period));
@@ -29,13 +31,17 @@ const StatisticsPage: React.FC = () => {
     <>
       <Header />
       <Container withBlur>
-        <div className="home-page">
-          <div className="home-page__sidebar-wrapper">
+        <div className="statistics-page">
+          <div className="statistics-page__sidebar-wrapper">
             <Sidebar />
           </div>
 
-          <div className="home-page__statistics-wrapper">
-            <StatisticsTab statistics={statistics} onChangePeriod={setPeriod} />
+          <div className="statistics-page__statistics-tab-wrapper">
+            <StatisticsTab
+              statistics={statistics}
+              totalBalance={user.balance}
+              onChangePeriod={setPeriod}
+            />
           </div>
         </div>
       </Container>

@@ -9,24 +9,20 @@
   }
 
   &__sidebar-wrapper {
-    margin-bottom: 30px;
-    padding-top: 15px;
+    margin: 15px 0 30px;
 
     @media (min-width: 768px) {
       margin-bottom: 20px;
     }
 
     @media (min-width: 1280px) {
-      margin-bottom: 0;
-      padding-top: 40px;
-      padding-right: 60px;
+      margin: 40px 75px 0 0;
       box-sizing: border-box;
-      width: 480px;
 
       &::after {
         content: "";
         position: absolute;
-        left: 480px;
+        left: 470px;
         top: 0;
         height: 100%;
         width: 1px;

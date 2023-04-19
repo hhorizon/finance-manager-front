@@ -7,13 +7,13 @@ import { normalizeAmount } from "../../../utils";
 import {
   Transaction,
   AddTransactionRequestBody,
-  Categories,
+  CategoriesList,
 } from "../../../types";
 import "./styles.scss";
 
 interface TransactionListMobileProps {
   transactions: Transaction[];
-  categories: Categories;
+  categories: CategoriesList;
   selectedTransaction: Transaction | null;
   setSelectedTransaction: (transaction: Transaction | null) => void;
   onBottomScroll: () => void;
