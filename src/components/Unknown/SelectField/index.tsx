@@ -3,20 +3,20 @@ import React from "react";
 import Select from "react-select";
 import { StateManagerProps } from "react-select/dist/declarations/src/useStateManager";
 
-type MyOption = {
+type Option = {
   label: string;
   value: any;
 };
 
 type GroupedOption = {
   label: string;
-  options: MyOption[];
+  options: Option[];
 };
 
 type SelectFieldProps = {
   name: string;
 } & Omit<
-  StateManagerProps<MyOption, false | true, GroupedOption>,
+  StateManagerProps<Option, false | true, GroupedOption>,
   "value" | "onChange"
 >;
 
@@ -50,7 +50,7 @@ export const SelectField: React.FC<SelectFieldProps> = (props) => {
       {...restProps}
       value={value}
       onChange={(val) => {
-        const _val = val as MyOption[] | MyOption;
+        const _val = val as Option[] | Option;
         const isArray = Array.isArray(_val);
         if (isArray) {
           const values = _val.map((o) => o.value);

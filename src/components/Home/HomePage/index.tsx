@@ -24,6 +24,7 @@ import {
   categoriesSelector,
 } from "../../../redux/selectors/transactions-selectors";
 import { userSelector } from "../../../redux/selectors/user-selectors";
+import { isUserloggedInSelector } from "../../../redux/selectors/auth-selectors";
 import { AddTransactionRequestBody, Transaction } from "../../../types";
 import "./styles.scss";
 
@@ -34,6 +35,7 @@ const HomePage: React.FC = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
+  const isUserloggedIn = useAppSelector(isUserloggedInSelector);
   const categories = useAppSelector(categoriesSelector);
   const { transactions, totalPages, nextPage } = useAppSelector(
     allTransactionsSelector,
@@ -68,8 +70,8 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
-    user.balance && dispatch(fetchAllTransactions(1));
-  }, [dispatch, user.balance]);
+    isUserloggedIn && dispatch(fetchAllTransactions(1));
+  }, [dispatch, isUserloggedIn]);
 
   return (
     <>
@@ -80,32 +82,30 @@ const HomePage: React.FC = () => {
             <Sidebar />
           </div>
 
-          {transactions && (
-            <div className="home-page__trasactions-list-wrapper">
-              {isMobile ? (
-                <TransactionListMobile
-                  transactions={transactions}
-                  categories={categories}
-                  selectedTransaction={selectedTransaction}
-                  setSelectedTransaction={setSelectedTransaction}
-                  onBottomScroll={fetchNextPageOnScroll}
-                  onUpdate={handleUpdateTransaction}
-                  onDelete={() => setShowDeleteModal(true)}
-                />
-              ) : (
-                <TransactionListDesktop
-                  transactions={transactions}
-                  totalPages={totalPages}
-                  categories={categories}
-                  selectedTransaction={selectedTransaction}
-                  setSelectedTransaction={setSelectedTransaction}
-                  onPaginationChange={fetchNextPageOnPaginationChange}
-                  onUpdate={handleUpdateTransaction}
-                  onDelete={() => setShowDeleteModal(true)}
-                />
-              )}
-            </div>
-          )}
+          <div className="home-page__trasactions-list-wrapper">
+            {isMobile ? (
+              <TransactionListMobile
+                transactions={transactions}
+                categories={categories}
+                selectedTransaction={selectedTransaction}
+                setSelectedTransaction={setSelectedTransaction}
+                onBottomScroll={fetchNextPageOnScroll}
+                onUpdate={handleUpdateTransaction}
+                onDelete={() => setShowDeleteModal(true)}
+              />
+            ) : (
+              <TransactionListDesktop
+                transactions={transactions}
+                totalPages={totalPages}
+                categories={categories}
+                selectedTransaction={selectedTransaction}
+                setSelectedTransaction={setSelectedTransaction}
+                onPaginationChange={fetchNextPageOnPaginationChange}
+                onUpdate={handleUpdateTransaction}
+                onDelete={() => setShowDeleteModal(true)}
+              />
+            )}
+          </div>
         </div>
       </Container>
 

@@ -44,14 +44,18 @@ const ChangeTransactionFormMobile: React.FC<
   const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
   const initialValues: FormValues = {
-    category,
+    category: category.name,
     sum,
     date: new Date(date),
     comment,
   };
 
   const onSubmit = (values: FormValues) => {
-    onUpdate(_id, { type, ...values });
+    onUpdate(_id, {
+      type,
+      ...values,
+      category: { name: values.category, color: "qweqwe" },
+    });
   };
 
   return (

@@ -10,6 +10,8 @@ import {
   AddTransactionResponse,
   UpdateTransactionResponse,
   DeleteTransactionResponse,
+  StatisticsResponse,
+  StatisticsData,
 } from "../../types";
 
 export const fetchAllTransactions = createAsyncThunk<
@@ -106,9 +108,20 @@ export const deleteTransaction = createAsyncThunk<
   }
 });
 
-// export const getStatistics=
-// // ////////////////////////
-// const { data: qwe } = await axios.get(
-//   `/statistics?startDate=2023-04-01T00:00:00&endDate=2023-04-02T23:59:59`,
-// );
-// console.log(qwe);
+export const fetchStatistics = createAsyncThunk<
+  StatisticsData,
+  { startDate: string; endDate: string }
+>("transactions/fetchStatistics", async ({ startDate, endDate }, thunkAPI) => {
+  try {
+    const { data } = await axios.get<StatisticsResponse>(
+      `/statistics?startDate=${startDate}T00:00:00&endDate=${endDate}T23:59:59`,
+    );
+
+    return data.payload;
+  } catch (error) {
+    if (error instanceof AxiosError)
+      createNotification(error.response?.data.message, "error");
+
+    return thunkAPI.rejectWithValue(null);
+  }
+});

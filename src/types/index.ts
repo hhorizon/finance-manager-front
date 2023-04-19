@@ -1,13 +1,20 @@
 export type TransactionType = "spending" | "incoming";
+
+export type Category = { name: string; color: string };
+
 export type Categories = {
-  incoming: Array<string>;
-  spending: Array<string>;
+  incoming: Array<Category>;
+  spending: Array<Category>;
+};
+export type Period = {
+  startDate: string;
+  endDate: string;
 };
 
 export type Transaction = {
   _id: string;
   type: TransactionType;
-  category: string;
+  category: Category;
   sum: number;
   date: Date;
   balance: number;
@@ -19,7 +26,6 @@ export type User = {
   email: string | null;
   balance: number | null;
   subscription: string | null;
-  // categories: Categories;
 };
 
 export type PrivateBankCurrency = {
@@ -46,6 +52,15 @@ export type AddFormValues = {
   sum: number;
   date: Date;
   comment: string;
+};
+
+export type StatisticsByCategories = {
+  categories: Array<{
+    name: string;
+    sum: number;
+    color: string;
+  }>;
+  totalSum: number;
 };
 
 // Axios types
@@ -134,4 +149,18 @@ export type UpdateBalanceData = {
 
 export type UpdateBalanceResponse = {
   payload: UpdateBalanceData;
+};
+
+// // get statistics
+export type Statistics = {
+  incomingStatistics: StatisticsByCategories;
+  spendingStatistics: StatisticsByCategories;
+};
+
+export type StatisticsData = {
+  statistics: Statistics;
+};
+
+export type StatisticsResponse = {
+  payload: StatisticsData;
 };

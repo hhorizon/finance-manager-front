@@ -70,7 +70,7 @@ const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
                 {moment(transaction.date).format("DD.MM.YYYY")}
               </p>
               <p className="trans-list-desktop__body__value trans-list-desktop__body__value--start">
-                {transaction.category}
+                {transaction.category.name}
               </p>
               <p className="trans-list-desktop__body__value trans-list-desktop__body__value--start ">
                 <span className="trans-list-desktop__body__value--limit">

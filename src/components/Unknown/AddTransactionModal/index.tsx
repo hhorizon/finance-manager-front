@@ -40,7 +40,13 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
   };
 
   const onSubmit = async (values: AddFormValues) => {
-    await dispatch(addTransaction({ type, ...values }));
+    await dispatch(
+      addTransaction({
+        type,
+        ...values,
+        category: { name: values.category, color: "qweqwe" },
+      }),
+    );
     await dispatch(fetchAllTransactions(1));
     closeModal();
   };
