@@ -4,12 +4,14 @@ import {
   addTransaction,
   updateTransaction,
   fetchNextPage,
+  fetchStatistics,
 } from "../actions/transactions-operations";
-import { AllTransactions, Categories } from "../../types";
+import { AllTransactions, CategoriesList, Statistics } from "../../types";
 
 type TransactionsState = {
   allTransition: AllTransactions;
-  categories: Categories;
+  categories: CategoriesList;
+  statistics: Statistics;
   isTransactionsLoading: boolean;
 };
 
@@ -25,6 +27,16 @@ const initialState: TransactionsState = {
     nextPage: null,
   },
   categories: { incoming: [], spending: [] },
+  statistics: {
+    incomingStatistics: {
+      categories: [],
+      totalSum: 0,
+    },
+    spendingStatistics: {
+      categories: [],
+      totalSum: 0,
+    },
+  },
   isTransactionsLoading: false,
 };
 
@@ -82,6 +94,18 @@ const transactionsSlice = createSlice({
       };
     });
     builder.addCase(fetchNextPage.rejected, (state) => {
+      state.isTransactionsLoading = false;
+    });
+
+    // statistics
+    builder.addCase(fetchStatistics.pending, (state) => {
+      state.isTransactionsLoading = true;
+    });
+    builder.addCase(fetchStatistics.fulfilled, (state, { payload }) => {
+      state.statistics = payload.statistics;
+      state.isTransactionsLoading = false;
+    });
+    builder.addCase(fetchStatistics.rejected, (state) => {
       state.isTransactionsLoading = false;
     });
   },

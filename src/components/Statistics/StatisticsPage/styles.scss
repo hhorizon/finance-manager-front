@@ -1,56 +1,43 @@
 .statistics-page {
   position: relative;
-  padding: 60px 20px;
+  padding: 60px 0 30px;
+  min-height: 100vh;
 
-  @media (min-width: 768px) {
-    padding: 60px 0;
+  @media (min-width: 1280px) {
+    display: flex;
+    justify-content: space-between;
   }
 
-  &__side-bar {
-    margin-top: 15px;
-    margin-bottom: 30px;
+  &__sidebar-wrapper {
+    margin: 15px 0 30px;
 
     @media (min-width: 768px) {
-      display: flex;
-      align-items: flex-end;
-      margin-bottom: 20px;
-      gap: 32px;
+      margin-bottom: 40px;
     }
 
     @media (min-width: 1280px) {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 40px;
-      margin-bottom: 0;
-      padding-right: 50px;
+      margin: 40px 75px 0 0;
       box-sizing: border-box;
-      width: 460px;
 
       &::after {
         content: "";
         position: absolute;
-        left: 460px;
+        left: 470px;
         top: 0;
-        height: 100vh;
+        height: 100%;
         width: 1px;
         background-color: var(--main-background-color);
         box-shadow: -1px 0px 0px var(--secondary-shadow-color),
           1px 0px 0px var(--main-shadow-color);
       }
     }
+  }
 
-    &__navigation-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
+  &__statistics-tab-wrapper {
+    @media (min-width: 1280px) {
+      margin-left: 75px;
+      padding-top: 40px;
       width: 100%;
-
-      @media (min-width: 768px) {
-        align-items: start;
-        gap: 25px;
-      }
     }
   }
 }

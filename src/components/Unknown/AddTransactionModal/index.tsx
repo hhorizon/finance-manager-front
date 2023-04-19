@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import Datetime from "react-datetime";
+import Select from "react-select";
 import "react-datetime/css/react-datetime.css";
 
 import Toggle from "../Toggle";
 import Button from "../Button";
-import { SelectField } from "../SelectField";
 import { CloseIcon, CalendarIcon } from "../Icons";
 
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
@@ -33,14 +33,19 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
   const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
   const initialValues: AddFormValues = {
-    category: "",
+    category: { name: "", color: "" },
     sum: 0,
     date: new Date(),
     comment: "",
   };
 
   const onSubmit = async (values: AddFormValues) => {
-    await dispatch(addTransaction({ type, ...values }));
+    await dispatch(
+      addTransaction({
+        type,
+        ...values,
+      }),
+    );
     await dispatch(fetchAllTransactions(1));
     closeModal();
   };
@@ -75,13 +80,16 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
             </div>
 
             <div className="add-modal__field">
-              <SelectField
+              <Select
                 required
-                name="category"
                 options={categoriesForSelect}
                 placeholder="Select category"
                 classNamePrefix="add-modal__field__select"
                 openMenuOnFocus
+                onChange={(val) => {
+                  setFieldValue("category.name", val?.label);
+                  setFieldValue("category.color", val?.value);
+                }}
               />
             </div>
 

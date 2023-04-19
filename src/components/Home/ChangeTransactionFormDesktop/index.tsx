@@ -1,29 +1,23 @@
 import React, { useEffect, useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 import Datetime from "react-datetime";
+import Select from "react-select";
 import moment from "moment";
 
-import { SelectField } from "../../Unknown/SelectField";
 import { SaveIcon, DeleteIcon } from "../../Unknown/Icons";
 
 import { mapCategoriesForSelect } from "../../../utils";
 import {
   Transaction,
   AddTransactionRequestBody,
-  Categories,
+  CategoriesList,
+  AddFormValues,
 } from "../../../types";
 import "./styles.scss";
 
-type FormValues = {
-  category: string;
-  sum: number;
-  date: Date;
-  comment: string;
-};
-
 interface ChangeTransactionFormDesktopProps {
   transaction: Transaction;
-  categories: Categories;
+  categories: CategoriesList;
   onUpdate: (id: string, body: AddTransactionRequestBody) => void;
   onDelete: (id: string) => void;
   setSelectedTransaction: (transaction: Transaction | null) => void;
@@ -42,15 +36,18 @@ const ChangeTransactionFormDesktop: React.FC<
 
   const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
-  const initialValues: FormValues = {
-    category,
+  const initialValues: AddFormValues = {
+    category: { name: category.name, color: category.color },
     sum,
     date: new Date(date),
     comment,
   };
 
-  const onSubmit = (values: FormValues) => {
-    onUpdate(_id, { type, ...values });
+  const onSubmit = (values: AddFormValues) => {
+    onUpdate(_id, {
+      type,
+      ...values,
+    });
   };
 
   const handleKeyDown = useCallback(
@@ -96,13 +93,21 @@ const ChangeTransactionFormDesktop: React.FC<
             </div>
 
             <div className="change-trans-desktop__field change-trans-desktop__field--left">
-              <SelectField
+              <Select
                 required
-                name="category"
+                name="category.name"
+                value={{
+                  label: values.category.name,
+                  value: values.category.color,
+                }}
                 options={categoriesForSelect}
                 className="change-trans-desktop__field__select__container"
                 classNamePrefix="change-trans-desktop__field__select"
                 openMenuOnFocus
+                onChange={(val) => {
+                  setFieldValue("category.name", val?.label);
+                  setFieldValue("category.color", val?.value);
+                }}
               />
             </div>
 

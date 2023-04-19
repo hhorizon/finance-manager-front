@@ -8,14 +8,14 @@ import { normalizeAmount } from "../../../utils";
 import {
   Transaction,
   AddTransactionRequestBody,
-  Categories,
+  CategoriesList,
 } from "../../../types";
 import "./styles.scss";
 
 interface TransactionListDesktopProps {
   transactions: Transaction[];
   totalPages: number;
-  categories: Categories;
+  categories: CategoriesList;
   selectedTransaction: Transaction | null;
   setSelectedTransaction: (transaction: Transaction | null) => void;
   onPaginationChange: (page: number) => void;
@@ -70,7 +70,7 @@ const TransactionListDesktop: React.FC<TransactionListDesktopProps> = ({
                 {moment(transaction.date).format("DD.MM.YYYY")}
               </p>
               <p className="trans-list-desktop__body__value trans-list-desktop__body__value--start">
-                {transaction.category}
+                {transaction.category.name}
               </p>
               <p className="trans-list-desktop__body__value trans-list-desktop__body__value--start ">
                 <span className="trans-list-desktop__body__value--limit">
