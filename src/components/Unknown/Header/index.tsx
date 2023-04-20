@@ -13,10 +13,6 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
 
-  const onExit = () => {
-    dispatch(signOut());
-  };
-
   return (
     <header className="header">
       <div className="header__container">
@@ -28,7 +24,7 @@ const Header: React.FC = () => {
           <button
             title="Exit"
             className="header__user-menu__exit-button"
-            onClick={() => onExit()}
+            onClick={() => dispatch(signOut())}
           >
             <ExitIcon />
           </button>

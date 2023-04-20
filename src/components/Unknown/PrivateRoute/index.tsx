@@ -11,7 +11,7 @@ interface PrivateRouteProps {
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const isUserloggedIn = useAppSelector(isUserloggedInSelector);
 
-  if (!isUserloggedIn) return <Navigate to="login" replace={true} />;
+  if (!isUserloggedIn) return <Navigate to="/login" replace={true} />;
 
   return <>{children}</>;
 };
