@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import Container from "../../Unknown/Container";
 import LoginForm from "../LoginForm";
+import Button from "../../Unknown/Button";
 import loginImage from "../../../assets/img/login-page-img.png";
 
 import { useAppDispatch } from "../../../redux/hooks";
@@ -10,6 +12,7 @@ import { LoginFormValues } from "../../../types";
 import "./styles.scss";
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const onSubmit = (values: LoginFormValues) => {
@@ -31,7 +34,13 @@ const LoginPage: React.FC = () => {
         </div>
 
         <div className="login-page__form-wrapper">
-          <LoginForm onSubmit={onSubmit} />
+          <div className="login-page__form-container">
+            <LoginForm onSubmit={onSubmit} />
+
+            <Button type="button" onClick={() => navigate("/registration")}>
+              Registration
+            </Button>
+          </div>
         </div>
       </div>
     </Container>

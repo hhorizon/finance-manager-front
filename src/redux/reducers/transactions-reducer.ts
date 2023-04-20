@@ -13,6 +13,7 @@ type TransactionsState = {
   categories: CategoriesList;
   statistics: Statistics;
   isTransactionsLoading: boolean;
+  isStatisticsLoading: boolean;
 };
 
 const initialState: TransactionsState = {
@@ -38,6 +39,7 @@ const initialState: TransactionsState = {
     },
   },
   isTransactionsLoading: false,
+  isStatisticsLoading: false,
 };
 
 const transactionsSlice = createSlice({
@@ -45,7 +47,6 @@ const transactionsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // getAll
     builder.addCase(fetchAllTransactions.pending, (state) => {
       state.isTransactionsLoading = true;
     });
@@ -58,7 +59,6 @@ const transactionsSlice = createSlice({
       state.isTransactionsLoading = false;
     });
 
-    // add
     builder.addCase(addTransaction.pending, (state) => {
       state.isTransactionsLoading = true;
     });
@@ -69,7 +69,6 @@ const transactionsSlice = createSlice({
       state.isTransactionsLoading = false;
     });
 
-    // update
     builder.addCase(updateTransaction.pending, (state) => {
       state.isTransactionsLoading = true;
     });
@@ -80,7 +79,6 @@ const transactionsSlice = createSlice({
       state.isTransactionsLoading = false;
     });
 
-    // nextPage
     builder.addCase(fetchNextPage.pending, (state) => {
       state.isTransactionsLoading = true;
     });
@@ -92,21 +90,21 @@ const transactionsSlice = createSlice({
           ...payload.transactions.transactions,
         ],
       };
+      state.isTransactionsLoading = false;
     });
     builder.addCase(fetchNextPage.rejected, (state) => {
       state.isTransactionsLoading = false;
     });
 
-    // statistics
     builder.addCase(fetchStatistics.pending, (state) => {
-      state.isTransactionsLoading = true;
+      state.isStatisticsLoading = true;
     });
     builder.addCase(fetchStatistics.fulfilled, (state, { payload }) => {
       state.statistics = payload.statistics;
-      state.isTransactionsLoading = false;
+      state.isStatisticsLoading = false;
     });
     builder.addCase(fetchStatistics.rejected, (state) => {
-      state.isTransactionsLoading = false;
+      state.isStatisticsLoading = false;
     });
   },
 });

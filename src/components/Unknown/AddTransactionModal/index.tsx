@@ -50,7 +50,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
     closeModal();
   };
 
-  const handlerTypeChange = (checked: boolean) => {
+  const handleTypeChange = (checked: boolean) => {
     setType(checked ? "incoming" : "spending");
   };
 
@@ -74,7 +74,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
             <div className="add-modal__toggle-container">
               <p className={setActiveTypeNameClass("incoming")}>Incoming</p>
 
-              <Toggle onInputChange={handlerTypeChange} />
+              <Toggle onInputChange={handleTypeChange} />
 
               <p className={setActiveTypeNameClass("spending")}>Spending</p>
             </div>

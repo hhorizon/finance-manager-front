@@ -14,12 +14,7 @@ const Header: React.FC = () => {
   const user = useAppSelector(userSelector);
 
   const onExit = () => {
-    try {
-      dispatch(signOut());
-    } catch (error) {
-      // TODO add notification
-      console.log(error);
-    }
+    dispatch(signOut());
   };
 
   return (
@@ -28,7 +23,6 @@ const Header: React.FC = () => {
         <Logo />
 
         <div className="header__user-menu">
-          {/* TODO add user name */}
           <p className="header__user-menu__name">{user.name}</p>
 
           <button

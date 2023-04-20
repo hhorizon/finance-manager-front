@@ -10,6 +10,8 @@ import HomePage from "./components/Home/HomePage";
 import StatisticsPage from "./components/Statistics/StatisticsPage";
 import CurrencyPage from "./components/Currency/CurrencyPage";
 import Loader from "./components/Unknown/Loader";
+import ModalContainer from "./components/Unknown/ModalContainer";
+import NotFoundPage from "./components/Unknown/NotFoundPage";
 
 import { useAppDispatch } from "./redux/hooks";
 import { refreshCurrentUser } from "./redux/actions/auth-operations";
@@ -19,7 +21,6 @@ function App() {
 
   const refreshCurrentUserLoader = async () => {
     await dispatch(refreshCurrentUser());
-
     return null;
   };
 
@@ -28,6 +29,7 @@ function App() {
       path: "/",
       element: <Outlet />,
       loader: refreshCurrentUserLoader,
+      errorElement: <NotFoundPage />,
       children: [
         {
           index: true,
@@ -75,7 +77,14 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} fallbackElement={<Loader />} />
+      <RouterProvider
+        router={router}
+        fallbackElement={
+          <ModalContainer>
+            <Loader />
+          </ModalContainer>
+        }
+      />
     </>
   );
 }

@@ -34,9 +34,19 @@
   }
 
   &__trasactions-list-wrapper {
+    width: 100%;
+
     @media (min-width: 1280px) {
       padding-top: 40px;
+      max-width: 708px;
     }
+  }
+
+  &__loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
   }
 }
 

@@ -1,5 +1,4 @@
 import React, { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import PasswordStrengthEstimator from "../../Unknown/PasswordStrengthEstimator";
@@ -18,17 +17,12 @@ interface RegistrationFormProps {
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const initialValues: RegistrationFormValues = {
     email: "",
     password: "",
     repeatedPassword: "",
     name: "",
-  };
-
-  const toLoginPage = () => {
-    navigate("/login");
   };
 
   return (
@@ -139,10 +133,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
         <Button variant="main" type="submit">
           Registration
-        </Button>
-
-        <Button type="button" onClick={() => toLoginPage()}>
-          Login
         </Button>
       </Form>
     </Formik>

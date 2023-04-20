@@ -1,23 +1,11 @@
 import React from "react";
 
-// import { getCurrency } from "../../../services/privateBankService";
-// import { PrivateBankCurrency } from "../../../types";
 import { normalizeAmount } from "../../../utils";
 import "./styles.scss";
 
 import { currency } from "./mockData";
 
 const CurrencyTab: React.FC = () => {
-  // const [currency, setCurrensy] = useState<PrivateBankCurrency[] | null>(null);
-
-  // useEffect(() => {
-  //   getCurrency()
-  //     .then((result) => setCurrensy(result))
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
   return (
     <div className="currency">
       <div className="currency__head">

@@ -17,7 +17,7 @@ const Balance: React.FC = () => {
     String(user.balance),
   );
 
-  const handlerUpdateBalance = () => {
+  const handleUpdateBalance = () => {
     if (String(user.balance) === inputChangeValue)
       return setShowChangeInput(false);
 
@@ -67,7 +67,7 @@ const Balance: React.FC = () => {
 
               <button
                 className="balance__change__button"
-                onClick={handlerUpdateBalance}
+                onClick={handleUpdateBalance}
               >
                 <ArrowDownIcon />
               </button>

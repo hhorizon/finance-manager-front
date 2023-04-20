@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Select from "react-select";
 
 import { normalizeAmount, getPeriod, getDateOptions } from "../../../utils";
@@ -32,11 +32,14 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
     setSelectedYear(year);
   };
 
-  useEffect(() => {
-    const period = getPeriod(selectedMonth, selectedYear);
+  const period = useMemo(
+    () => getPeriod(selectedMonth, selectedYear),
+    [selectedMonth, selectedYear],
+  );
 
+  useEffect(() => {
     onChangePeriod(period);
-  }, [onChangePeriod, selectedMonth, selectedYear]);
+  }, [onChangePeriod, period]);
 
   return (
     <div className="statistics-list">

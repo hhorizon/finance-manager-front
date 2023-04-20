@@ -29,22 +29,18 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // signIn
     builder.addCase(signIn.fulfilled, (state, { payload }) => {
       state.user = payload.user;
     });
 
-    // refresh current user
     builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
       state.user = payload.user;
     });
 
-    // signOut
     builder.addCase(signOut.fulfilled, (state) => {
       state.user = initialState.user;
     });
 
-    // updateBalance
     builder.addCase(updateBalance.pending, (state) => {
       state.isUserLoading = true;
     });
@@ -56,7 +52,6 @@ const userSlice = createSlice({
       state.isUserLoading = false;
     });
 
-    // getAll
     builder.addCase(fetchAllTransactions.fulfilled, (state, { payload }) => {
       state.user.balance = payload.balance;
     });
