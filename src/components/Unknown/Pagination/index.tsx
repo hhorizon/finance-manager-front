@@ -14,8 +14,6 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPaginationChange,
 }) => {
-  console.log(currentPage);
-
   return (
     <>
       <ReactPaginate
