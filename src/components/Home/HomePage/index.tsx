@@ -10,6 +10,7 @@ import DeleteTransactionModal from "../../Unknown/InformationModal";
 import TransactionListMobile from "../TransactionListMobile";
 import TransactionListDesktop from "../TransactionListDesktop";
 import Loader from "../../Unknown/Loader";
+import Pagination from "../../Unknown/Pagination";
 
 import { PlusIcon } from "../../Unknown/Icons";
 
@@ -40,7 +41,7 @@ const HomePage: React.FC = () => {
   const isUserloggedIn = useAppSelector(isUserloggedInSelector);
   const isTransactionsLoading = useAppSelector(isTransactionsLoadingSelector);
   const categories = useAppSelector(categoriesSelector);
-  const { transactions, totalPages, nextPage } = useAppSelector(
+  const { transactions, page, totalPages, nextPage } = useAppSelector(
     allTransactionsSelector,
   );
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -103,16 +104,26 @@ const HomePage: React.FC = () => {
                     onDelete={() => setShowDeleteModal(true)}
                   />
                 ) : (
-                  <TransactionListDesktop
-                    transactions={transactions}
-                    totalPages={totalPages}
-                    categories={categories}
-                    selectedTransaction={selectedTransaction}
-                    setSelectedTransaction={setSelectedTransaction}
-                    onPaginationChange={fetchNextPageOnPaginationChange}
-                    onUpdate={handleUpdateTransaction}
-                    onDelete={() => setShowDeleteModal(true)}
-                  />
+                  <>
+                    <TransactionListDesktop
+                      transactions={transactions}
+                      currentPage={page}
+                      totalPages={totalPages}
+                      categories={categories}
+                      selectedTransaction={selectedTransaction}
+                      setSelectedTransaction={setSelectedTransaction}
+                      onPaginationChange={fetchNextPageOnPaginationChange}
+                      onUpdate={handleUpdateTransaction}
+                      onDelete={() => setShowDeleteModal(true)}
+                    />
+
+                    {/* <div className="trans-list-desktop__pagination">
+                      <Pagination
+                        totalPages={totalPages}
+                        onPaginationChange={fetchNextPageOnPaginationChange}
+                      />
+                    </div> */}
+                  </>
                 )}
               </>
             )}
