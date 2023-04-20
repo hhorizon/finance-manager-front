@@ -10,8 +10,6 @@ import DeleteTransactionModal from "../../Unknown/InformationModal";
 import TransactionListMobile from "../TransactionListMobile";
 import TransactionListDesktop from "../TransactionListDesktop";
 import Loader from "../../Unknown/Loader";
-import Pagination from "../../Unknown/Pagination";
-
 import { PlusIcon } from "../../Unknown/Icons";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
@@ -116,13 +114,6 @@ const HomePage: React.FC = () => {
                       onUpdate={handleUpdateTransaction}
                       onDelete={() => setShowDeleteModal(true)}
                     />
-
-                    {/* <div className="trans-list-desktop__pagination">
-                      <Pagination
-                        totalPages={totalPages}
-                        onPaginationChange={fetchNextPageOnPaginationChange}
-                      />
-                    </div> */}
                   </>
                 )}
               </>
