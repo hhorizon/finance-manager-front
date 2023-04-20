@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .home-page {
   position: relative;
   padding: 60px 0 30px;
@@ -17,7 +19,6 @@
 
     @media (min-width: 1280px) {
       margin: 40px 75px 0 0;
-      box-sizing: border-box;
 
       &::after {
         content: "";
@@ -26,9 +27,9 @@
         top: 0;
         height: 100%;
         width: 1px;
-        background-color: var(--main-background-color);
-        box-shadow: -1px 0px 0px var(--secondary-shadow-color),
-          1px 0px 0px var(--main-shadow-color);
+        background-color: $main-background-color;
+        box-shadow: -1px 0px 0px $secondary-shadow-color,
+          1px 0px 0px $main-shadow-color;
       }
     }
   }
@@ -43,9 +44,7 @@
   }
 
   &__loader-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %centered-box;
     min-height: 50vh;
   }
 }
@@ -57,13 +56,13 @@
   padding: 0;
   width: 44px;
   height: 44px;
-  background-color: var(--green-color);
-  box-shadow: 0px 6px 15px var(--green-transperent-color);
-  filter: drop-shadow(0px 3px 10px var(--main-transparent-color));
+  background-color: $green-color;
+  box-shadow: 0px 6px 15px $green-transparent-color;
+  filter: drop-shadow(0px 3px 10px $main-transparent-color);
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  transition: var(--main-transition);
+  transition: $main-transition;
 
   &:hover {
     transform: scale(1.1);

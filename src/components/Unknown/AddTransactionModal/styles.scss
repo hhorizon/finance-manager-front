@@ -1,9 +1,18 @@
+@import "../../../styles/vars.scss";
+
+%type-name {
+  @include font(700, 16px, 24px);
+  color: $secondary-placeholder-color;
+  transition: $main-transition;
+}
+
 .add-modal {
+  @extend %centered-box;
   margin: 0 -20px;
   padding: 20px;
   width: 100%;
   height: 100%;
-  background-color: var(--white-background-color);
+  background-color: $white-background-color;
 
   @media (min-width: 768px) {
     position: relative;
@@ -40,18 +49,14 @@
   }
 
   &__type-name {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    color: var(--secondary-placeholder-color);
-    transition: var(--main-transition);
-
     &--incoming {
-      color: var(--green-color);
+      @extend %type-name;
+      color: $green-color;
     }
 
     &--spending {
-      color: var(--red-color);
+      @extend %type-name;
+      color: $red-color;
     }
   }
 
@@ -75,62 +80,54 @@
 
     &__select {
       &__control {
-        font-family: var(--secondary-font) !important;
         font-size: 18px !important;
         letter-spacing: 0.5px !important;
         border: none !important;
         border-radius: 0 !important;
-        border-bottom: 1px solid var(--secondary-placeholder-color) !important;
+        border-bottom: 1px solid $secondary-placeholder-color !important;
         box-shadow: none !important;
         cursor: pointer !important;
 
         &--is-focused {
-          border-bottom: 1px solid var(--main-text-color) !important;
+          border-bottom: 1px solid $main-text-color !important;
         }
       }
 
-      &__input {
-        color: var(--main-text-color) !important;
+      &__input,
+      &__single-value,
+      &__menu {
+        color: $main-text-color !important;
       }
 
       &__value-container {
         padding-left: 20px !important;
       }
 
-      &__single-value {
-        color: var(--main-text-color) !important;
-      }
-
       &__placeholder {
-        color: var(--main-placeholder-color) !important;
-      }
-
-      &__menu {
-        color: var(--main-text-color) !important;
+        color: $main-placeholder-color !important;
       }
     }
 
     &__input {
-      box-sizing: border-box;
       display: block;
       padding-left: 20px;
       width: 100%;
       height: 34px;
-      font-family: var(--main-font);
+      font-family: $main-font;
       font-size: 18px;
       letter-spacing: 0.5px;
       outline: none;
       border: none;
-      border-bottom: 1px solid var(--secondary-placeholder-color);
+      border-bottom: 1px solid $secondary-placeholder-color;
       cursor: pointer;
-      transition: var(--main-transition);
+      transition: $main-transition;
 
       &:focus {
-        border-bottom: 1px solid var(--main-text-color);
+        border-bottom: 1px solid $main-text-color;
       }
 
       &::placeholder {
-        color: var(--main-placeholder-color);
+        color: $main-placeholder-color;
       }
     }
 

@@ -14,7 +14,7 @@ const Toggle: React.FC<ToggleProps> = ({
 }) => {
   const [checked, setChecked] = useState(defaultChecked);
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
     onInputChange(event.target.checked);
   };
@@ -23,17 +23,13 @@ const Toggle: React.FC<ToggleProps> = ({
     <div className="toggle">
       <label className="toggle__body" htmlFor="transactionType"></label>
 
-      <span className={checked ? "toggle__body__plus" : "toggle__body__minus"}>
-        {checked ? (
-          <PlusIcon className="switchToggleSvg" />
-        ) : (
-          <MinusIcon className="switchToggleSvg" />
-        )}
+      <span className={checked ? "toggle__plus" : "toggle__minus"}>
+        {checked ? <PlusIcon /> : <MinusIcon />}
       </span>
 
       <input
         className="toggle__input"
-        onChange={onChange}
+        onChange={handleChange}
         type="checkbox"
         id="transactionType"
         defaultChecked={checked}

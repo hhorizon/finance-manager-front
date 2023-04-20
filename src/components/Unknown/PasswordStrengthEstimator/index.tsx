@@ -36,8 +36,11 @@ const PasswordStrengthEstimator: React.FC<PasswordStrengthEstimatorProps> = ({
   });
 
   return (
-    <div className="progress__background">
-      <div className="progress__bar" style={changePasswordColor()}></div>
+    <div className="password-progress__background">
+      <div
+        className="password-progress__bar"
+        style={changePasswordColor()}
+      ></div>
     </div>
   );
 };

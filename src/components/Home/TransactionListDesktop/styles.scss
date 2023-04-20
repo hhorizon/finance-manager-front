@@ -1,15 +1,15 @@
+@import "../../../styles/vars.scss";
+
 .trans-list-desktop {
   &__head {
     display: grid;
     grid-template-columns: 98px 200px 200px 105px 105px;
     padding: 16px 0;
-    background-color: var(--white-background-color);
+    background-color: $white-background-color;
     border-radius: 30px;
 
     &__name {
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 27px;
+      @include font(700, 18px, 27px);
       text-align: center;
     }
   }
@@ -22,8 +22,8 @@
       cursor: pointer;
 
       &:not(:last-child) {
-        border-bottom: 1px solid var(--main-placeholder-color);
-        box-shadow: 0px 1px 0px var(--main-shadow-color);
+        border-bottom: 1px solid $main-placeholder-color;
+        box-shadow: 0px 1px 0px $main-shadow-color;
       }
     }
 
@@ -59,12 +59,12 @@
 
       &--spending {
         font-weight: 600;
-        color: var(--red-color);
+        color: $red-color;
       }
 
       &--incoming {
         font-weight: 600;
-        color: var(--green-color);
+        color: $green-color;
       }
     }
   }

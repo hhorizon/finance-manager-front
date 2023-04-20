@@ -1,14 +1,12 @@
+@import "../../../styles/vars.scss";
+
 .modal-container {
-  &__backdrop {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--third-shadow-color);
-    z-index: 11;
-  }
+  @extend %centered-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $third-shadow-color;
+  z-index: 11;
 }

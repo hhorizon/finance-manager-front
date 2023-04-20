@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .statistics-page {
   position: relative;
   padding: 60px 0 30px;
@@ -17,18 +19,17 @@
 
     @media (min-width: 1280px) {
       margin: 40px 75px 0 0;
-      box-sizing: border-box;
 
       &::after {
         content: "";
         position: absolute;
         left: 470px;
         top: 0;
-        height: 100%;
         width: 1px;
-        background-color: var(--main-background-color);
-        box-shadow: -1px 0px 0px var(--secondary-shadow-color),
-          1px 0px 0px var(--main-shadow-color);
+        height: 100%;
+        background-color: $main-background-color;
+        box-shadow: -1px 0px 0px $secondary-shadow-color,
+          1px 0px 0px $main-shadow-color;
       }
     }
   }
@@ -44,12 +45,7 @@
   }
 
   &__loader-wrapper {
-    // position: absolute;
-    // top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %centered-box;
     min-height: 50vh;
-    // width: 100%;
   }
 }

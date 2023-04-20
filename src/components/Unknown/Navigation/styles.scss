@@ -1,26 +1,38 @@
+@import "../../../styles/vars.scss";
+
 .navigation {
+  display: flex;
+  gap: 40px;
+
+  @media (min-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+
   &__link {
     @media (min-width: 768px) {
       display: flex;
       align-items: center;
     }
 
-    &:not(:last-child) {
-      margin-right: 40px;
+    &--active {
+      & svg {
+        fill: $main-color;
+        filter: drop-shadow(0px 3px 10px $main-transparent-color);
+      }
 
-      @media (min-width: 768px) {
-        margin-right: 0;
-        margin-bottom: 12px;
+      & p {
+        font-weight: 700;
       }
     }
 
     &__icon {
-      fill: var(--secondary-color);
-      transition: var(--main-transition);
+      fill: $secondary-color;
+      transition: $main-transition;
 
       &:hover {
-        fill: var(--main-color);
-        filter: drop-shadow(0px 3px 10px var(--main-transparent-color));
+        fill: $main-color;
+        filter: drop-shadow(0px 3px 10px $main-transparent-color);
       }
 
       @media (min-width: 768px) {
@@ -29,18 +41,7 @@
     }
 
     &__name {
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 27px;
+      @include font(400, 18px, 26px);
     }
   }
-}
-
-.active-link svg {
-  fill: var(--main-color);
-  filter: drop-shadow(0px 3px 10px var(--main-transparent-color));
-}
-
-.active-link p {
-  font-weight: 700;
 }

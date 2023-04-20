@@ -1,37 +1,37 @@
-@mixin button {
-  width: 100%;
-  max-width: 300px;
-  height: 50px;
-  padding: 0;
+@import "../../../styles/vars.scss";
+
+%button {
   margin: 0 auto;
-  font-size: 18px;
-  line-height: 27px;
+  padding: 0;
+  max-width: 300px;
+  width: 100%;
+  height: 50px;
+  @include font(400, 18px, 27px);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: 20px;
   cursor: pointer;
 }
 
-.button--main {
-  @include button;
+.button {
+  &--main {
+    @extend %button;
+    color: $secondary-text-color;
+    background-color: $green-color;
+    border: none;
+  }
 
-  color: var(--secondary-text-color);
-  background-color: var(--green-color);
-  border: none;
-}
+  &--secondary {
+    @extend %button;
+    color: $third-text-color;
+    background-color: $white-background-color;
+    border: 1px solid $third-text-color;
+  }
 
-.button--secondary {
-  @include button;
-
-  color: var(--third-text-color);
-  background-color: var(--white-background-color);
-  border: 1px solid var(--third-text-color);
-}
-
-.button--error {
-  @include button;
-
-  color: var(--secondary-text-color);
-  background-color: var(--error-text-color);
-  border: none;
+  &--error {
+    @extend %button;
+    color: $secondary-text-color;
+    background-color: $error-text-color;
+    border: none;
+  }
 }

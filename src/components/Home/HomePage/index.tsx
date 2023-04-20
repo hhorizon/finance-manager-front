@@ -140,7 +140,7 @@ const HomePage: React.FC = () => {
           <ModalContainer closeModal={() => setShowDeleteModal(false)}>
             <DeleteTransactionModal
               text="Do you want to delete this transaction?"
-              closeModal={() => setShowDeleteModal(false)}
+              onClose={() => setShowDeleteModal(false)}
               onSubmit={() => handleDeleteTransaction(selectedTransaction._id)}
             />
           </ModalContainer>

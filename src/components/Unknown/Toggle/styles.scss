@@ -1,3 +1,16 @@
+@import "../../../styles/vars.scss";
+
+%toggle-body {
+  @extend %centered-box;
+  position: absolute;
+  top: -2px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 0.25s ease-in-out;
+}
+
 .toggle {
   position: relative;
   width: 80px;
@@ -7,46 +20,25 @@
     width: 100%;
     height: 40px;
     border-radius: 30px;
-    border: 1px solid var(--main-placeholder-color);
+    border: 1px solid $main-placeholder-color;
     cursor: pointer;
+  }
 
-    &__plus {
-      @extend .toggle-body;
-      transform: translateX(-4px);
-      background-color: var(--green-color);
-      box-shadow: 0px 6px 15px var(--green-transperent-color);
-    }
+  &__plus {
+    @extend %toggle-body;
+    transform: translateX(-4px);
+    background-color: $green-color;
+    box-shadow: 0px 6px 15px $green-transparent-color;
+  }
 
-    &__minus {
-      @extend .toggle-body;
-      transform: translateX(40px);
-      background-color: var(--red-color);
-      box-shadow: 0px 6px 15px var(--red-transperent-color);
-    }
+  &__minus {
+    @extend %toggle-body;
+    transform: translateX(40px);
+    background-color: $red-color;
+    box-shadow: 0px 6px 15px $red-transparent-color;
   }
 
   &__input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    height: 0;
-    width: 0;
-    pointer-events: none;
+    display: none;
   }
-}
-
-.toggle-body {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: -1px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  pointer-events: none;
-  transition: transform 0.25s ease-in-out;
 }

@@ -9,7 +9,6 @@ const Loader: React.FC = () => {
       color="#4a56e2"
       ariaLabel="bars-loading"
       wrapperStyle={{}}
-      wrapperClass=""
       visible={true}
     />
   );

@@ -9,21 +9,23 @@ import "./styles.scss";
 interface InformationModalProps {
   text: string;
   subText?: string;
-  closeModal: () => void;
+  onClose: () => void;
   onSubmit?: () => void;
 }
 
 const InformationModal: React.FC<InformationModalProps> = ({
   text,
   subText,
-  closeModal,
+  onClose,
   onSubmit,
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <div className="info-modal">
-      {!isMobile && <CloseIcon onClick={closeModal} />}
+      {!isMobile && (
+        <CloseIcon onClick={onClose} className="info-modal__exit-icon" />
+      )}
 
       <p className="info-modal__text">{text}</p>
 
@@ -33,7 +35,7 @@ const InformationModal: React.FC<InformationModalProps> = ({
         Delete
       </Button>
 
-      <Button onClick={closeModal}>Cancel</Button>
+      <Button onClick={onClose}>Cancel</Button>
     </div>
   );
 };

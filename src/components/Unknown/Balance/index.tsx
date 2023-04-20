@@ -12,7 +12,7 @@ const Balance: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
   const [showChangeInput, setShowChangeInput] = useState(false);
-  const [createInputValue, setCreateInputValue] = useState(0);
+  const [createInputValue, setCreateInputValue] = useState<number>();
   const [changeInputValue, setChangeInputValue] = useState(user.balance);
 
   const closeChangeInput = () => {
@@ -21,7 +21,7 @@ const Balance: React.FC = () => {
   };
 
   const handleCreateBalance = () => {
-    dispatch(updateBalance(createInputValue));
+    createInputValue && dispatch(updateBalance(createInputValue));
   };
 
   const handleUpdateBalance = () => {

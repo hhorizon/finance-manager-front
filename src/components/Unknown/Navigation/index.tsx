@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 import { HomeIcon, StatisticsIcon, CurrencyIcon } from "../Icons";
@@ -7,8 +7,6 @@ import { HomeIcon, StatisticsIcon, CurrencyIcon } from "../Icons";
 import "./styles.scss";
 
 const Navigation: React.FC = () => {
-  const location = useLocation();
-
   const isMobile = useMediaQuery({
     maxWidth: 767,
   });
@@ -17,11 +15,10 @@ const Navigation: React.FC = () => {
     <nav className="navigation">
       <NavLink
         to="/"
-        state={{
-          from: location.pathname,
-        }}
         className={({ isActive }) =>
-          isActive ? "navigation__link active-link" : "navigation__link"
+          isActive
+            ? "navigation__link navigation__link--active"
+            : "navigation__link"
         }
       >
         {isMobile ? (
@@ -40,11 +37,10 @@ const Navigation: React.FC = () => {
 
       <NavLink
         to="/statistics"
-        state={{
-          from: location.pathname,
-        }}
         className={({ isActive }) =>
-          isActive ? "navigation__link active-link" : "navigation__link"
+          isActive
+            ? "navigation__link navigation__link--active"
+            : "navigation__link"
         }
       >
         {isMobile ? (
@@ -64,11 +60,10 @@ const Navigation: React.FC = () => {
       {isMobile && (
         <NavLink
           to="/currency"
-          state={{
-            from: location.pathname,
-          }}
           className={({ isActive }) =>
-            isActive ? "navigation__link active-link" : "navigation__link"
+            isActive
+              ? "navigation__link navigation__link--active"
+              : "navigation__link"
           }
         >
           <CurrencyIcon className="navigation__link__icon" />

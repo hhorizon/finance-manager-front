@@ -1,38 +1,52 @@
-:root {
-  // colors
-  --main-color: #4a56e2;
-  --secondary-color: #6e78e8;
-  --green-color: #24cca7;
-  --red-color: #ff6596;
-  --main-transparent-color: #4a56e280;
-  --green-transperent-color: #24cca780;
-  --red-transperent-color: #ff659680;
+// colors
+$main-color: #4a56e2;
+$secondary-color: #6e78e8;
+$green-color: #24cca7;
+$red-color: #ff6596;
 
-  // bg colors
-  --main-background-color: #e7eaf2;
-  --secondary-background-color: rgba(255, 255, 255, 0.4);
-  --white-background-color: #ffffff;
+// transparent colors
+$main-transparent-color: rgba(74, 86, 226, 0.502);
+$green-transparent-color: rgba(36, 204, 167, 0.502);
+$red-transparent-color: rgba(255, 101, 150, 0.502);
 
-  // text colors
-  --main-text-color: #000000;
-  --secondary-text-color: #ffffff;
-  --third-text-color: #4a56e2;
-  --error-text-color: #ff5b5c;
+// bg colors
+$main-background-color: #e7eaf2;
+$secondary-background-color: rgba(255, 255, 255, 0.4);
+$white-background-color: #ffffff;
 
-  //  placeholder colors
-  --main-placeholder-color: #bdbdbd;
-  --secondary-placeholder-color: #e0e0e0;
-  --third-placeholder-color: #a6a6a6;
+// text colors
+$main-text-color: #000000;
+$secondary-text-color: #ffffff;
+$third-text-color: #4a56e2;
+$error-text-color: #ff5b5c;
 
-  // shadow colors
-  --main-shadow-color: rgba(255, 255, 255, 0.6);
-  --secondary-shadow-color: rgba(0, 0, 0, 0.05);
-  --third-shadow-color: rgba(0, 0, 0, 0.2);
+//  placeholder colors
+$main-placeholder-color: #bdbdbd;
+$secondary-placeholder-color: #e0e0e0;
+$third-placeholder-color: #a6a6a6;
 
-  //  fonts
-  --main-font: "Circe", sans-serif;
-  --secondary-font: "Segoeui", sans-serif;
+// shadow colors
+$main-shadow-color: rgba(255, 255, 255, 0.6);
+$secondary-shadow-color: rgba(0, 0, 0, 0.05);
+$third-shadow-color: rgba(0, 0, 0, 0.2);
 
-  //  transition
-  --main-transition: all 250ms ease;
+//  fonts
+$main-font: "Circe", sans-serif;
+$secondary-font: "Segoeui", sans-serif;
+
+//  transition
+$main-transition: all 250ms ease;
+
+//  templates
+%centered-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// mixins
+@mixin font($w, $s, $l) {
+  font-weight: $w;
+  font-size: $s;
+  line-height: $l;
 }

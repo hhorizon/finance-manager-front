@@ -6,11 +6,10 @@ import "./styles.scss";
 
 const Logo: React.FC = () => {
   return (
-    <Link to="/">
-      <div className="logo">
-        <WalletIcon />
-        <p className="logo__title">Fin.Manager</p>
-      </div>
+    <Link to="/" className="logo">
+      <WalletIcon />
+
+      <p className="logo__title">Fin.Manager</p>
     </Link>
   );
 };

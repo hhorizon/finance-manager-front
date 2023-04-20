@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .registration-page {
   @media (min-width: 768px) {
     display: flex;
@@ -29,19 +31,18 @@
 
   &__image {
     @media (min-width: 768px) {
-      height: 250px;
       margin-right: 60px;
+      height: 250px;
     }
 
     @media (min-width: 1280px) {
-      height: 413px;
       margin-right: 0;
       margin-bottom: 30px;
+      height: 413px;
     }
   }
 
   &__title {
-    font-family: var(--secondary-font);
     font-size: 30px;
     line-height: 45px;
   }
@@ -52,11 +53,10 @@
       justify-content: center;
       align-items: center;
       margin-left: 20px;
-      padding: 0 100px;
       max-width: none;
       width: 733px;
       height: 100vh;
-      background-color: var(--secondary-background-color);
+      background-color: $secondary-background-color;
       backdrop-filter: blur(50px);
     }
   }
@@ -69,13 +69,13 @@
     padding: 40px 20px 65px;
     width: 100%;
     min-height: 100vh;
-    background-color: var(--white-background-color);
+    background-color: $white-background-color;
 
     @media (min-width: 480px) {
-      padding: 40px 65px 65px;
-      border-radius: 20px;
       align-items: center;
+      padding: 40px 65px 65px;
       max-width: 533px;
+      border-radius: 20px;
     }
 
     @media (min-width: 768px) {

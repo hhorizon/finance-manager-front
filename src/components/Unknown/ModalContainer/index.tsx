@@ -35,11 +35,7 @@ const ModalContainer: React.FC<ModalContainerProps> = ({
   }, [closeModal]);
 
   return createPortal(
-    <div
-      id="backdrop"
-      className="modal-container__backdrop"
-      onClick={handleBackdropClick}
-    >
+    <div className="modal-container" onClick={handleBackdropClick}>
       {children}
     </div>,
     modalRoot,

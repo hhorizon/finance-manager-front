@@ -29,7 +29,6 @@ function App() {
       path: "/",
       element: <Outlet />,
       loader: refreshCurrentUserLoader,
-      errorElement: <NotFoundPage />,
       children: [
         {
           index: true,
@@ -72,6 +71,10 @@ function App() {
           ),
         },
       ],
+    },
+    {
+      path: "/*",
+      element: <NotFoundPage />,
     },
   ]);
 

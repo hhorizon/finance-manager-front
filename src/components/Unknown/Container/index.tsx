@@ -11,13 +11,13 @@ const Container: React.FC<ContainerProps> = ({
   children,
   withBlur = false,
 }) => {
-  const backdropClassName = withBlur
-    ? "container__backdrop with-blur"
-    : "container__backdrop";
-
   return (
     <main className="container__background">
-      <div className={backdropClassName}>
+      <div
+        className={`container__backdrop ${
+          withBlur && "container__backdrop--with-blur"
+        }`}
+      >
         <div className="container">{children}</div>
       </div>
     </main>

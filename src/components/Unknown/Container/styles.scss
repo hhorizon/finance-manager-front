@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .container {
   margin: 0 auto;
   padding: 0 20px;
@@ -18,7 +20,7 @@
   }
 
   &__background {
-    background-color: var(--main-background-color);
+    background-color: $main-background-color;
 
     @media (min-width: 480px) {
       min-height: 100vh;
@@ -37,9 +39,9 @@
     @media (min-width: 480px) {
       min-height: 100vh;
     }
-  }
-}
 
-.with-blur {
-  backdrop-filter: blur(50px);
+    &--with-blur {
+      backdrop-filter: blur(50px);
+    }
+  }
 }

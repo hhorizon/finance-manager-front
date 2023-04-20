@@ -22,7 +22,7 @@ const initialState: TransactionsState = {
     hasPrevPage: false,
     limit: 0,
     page: 1,
-    totalPages: 0,
+    totalPages: 1,
     totalTransaction: 0,
     transactions: [],
     nextPage: null,

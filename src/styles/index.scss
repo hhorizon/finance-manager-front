@@ -30,7 +30,7 @@ img {
 }
 
 a {
-  color: var(--main-text-color);
+  color: $main-text-color;
   text-decoration: none;
 }
 
@@ -41,8 +41,8 @@ li {
 body {
   margin: 0;
   height: 100%;
-  font-family: var(--main-font);
-  color: var(--main-text-color);
+  font-family: $main-font;
+  color: $main-text-color;
 }
 
 html {

@@ -1,13 +1,10 @@
+@import "../../../styles/vars.scss";
+
 .logo {
   display: flex;
 
   &__title {
-    margin: 0;
     margin-left: 20px;
-    font-family: var(--secondary-font);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 45px;
+    @include font(700, 30px, 45px);
   }
 }

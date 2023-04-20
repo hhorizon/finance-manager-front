@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .statistics-diagram {
   position: relative;
   width: 100%;
@@ -11,8 +13,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 27px;
+    @include font(700, 18px, 27px);
   }
 }

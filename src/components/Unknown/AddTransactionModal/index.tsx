@@ -54,12 +54,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
     setType(checked ? "incoming" : "spending");
   };
 
-  const setActiveTypeNameClass = (typeName: string) => {
-    return type === typeName
-      ? `add-modal__type-name add-modal__type-name--${typeName}`
-      : "add-modal__type-name";
-  };
-
   return (
     <div className="add-modal">
       <button className="add-modal__close-btn" onClick={closeModal}>
@@ -72,11 +66,11 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
             <p className="add-modal__title">Add transaction</p>
 
             <div className="add-modal__toggle-container">
-              <p className={setActiveTypeNameClass("incoming")}>Incoming</p>
+              <p className="add-modal__type-name--incoming">Incoming</p>
 
               <Toggle onInputChange={handleTypeChange} />
 
-              <p className={setActiveTypeNameClass("spending")}>Spending</p>
+              <p className="add-modal__type-name--spending">Spending</p>
             </div>
 
             <div className="add-modal__field">
