@@ -9,20 +9,26 @@ import { normalizeAmount } from "../../../utils";
 import "./styles.scss";
 
 const Balance: React.FC = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [showChangeInput, setShowChangeInput] = useState(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
-  const [inputChangeValue, setChangeInputValue] = useState(
-    String(user.balance),
-  );
+  const [showChangeInput, setShowChangeInput] = useState(false);
+  const [createInputValue, setCreateInputValue] = useState(0);
+  const [changeInputValue, setChangeInputValue] = useState(user.balance);
+
+  const closeChangeInput = () => {
+    setChangeInputValue(user.balance);
+    setShowChangeInput(false);
+  };
+
+  const handleCreateBalance = () => {
+    dispatch(updateBalance(createInputValue));
+  };
 
   const handleUpdateBalance = () => {
-    if (String(user.balance) === inputChangeValue)
-      return setShowChangeInput(false);
+    if (user.balance === changeInputValue) return closeChangeInput();
 
-    dispatch(updateBalance(Number(inputChangeValue)));
-    setShowChangeInput(false);
+    dispatch(updateBalance(changeInputValue ?? 0));
+    closeChangeInput();
   };
 
   if (user.balance === null)
@@ -31,16 +37,16 @@ const Balance: React.FC = () => {
         <input
           type="number"
           step={0.5}
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={createInputValue}
+          onChange={(e) => setCreateInputValue(Number(e.target.value))}
           placeholder="Add your balance to start"
           className="balance__add__input"
         />
 
-        {Number(inputValue) !== 0 && (
+        {createInputValue !== 0 && (
           <button
             className="balance__add__button"
-            onClick={() => dispatch(updateBalance(Number(inputValue)))}
+            onClick={handleCreateBalance}
           >
             <ArrowDownIcon />
           </button>
@@ -54,14 +60,13 @@ const Balance: React.FC = () => {
         <p className="balance__title">Balance</p>
 
         <div className="balance__change">
-          ₴&nbsp;
           {showChangeInput ? (
             <>
               <input
                 type="number"
                 step={0.5}
-                value={inputChangeValue}
-                onChange={(e) => setChangeInputValue(e.target.value)}
+                value={String(changeInputValue)}
+                onChange={(e) => setChangeInputValue(Number(e.target.value))}
                 className="balance__change__input"
               />
 
@@ -86,7 +91,7 @@ const Balance: React.FC = () => {
       {showChangeInput && (
         <div
           className="balance__change__backdrop"
-          onClick={() => setShowChangeInput(false)}
+          onClick={() => closeChangeInput()}
         ></div>
       )}
     </div>
