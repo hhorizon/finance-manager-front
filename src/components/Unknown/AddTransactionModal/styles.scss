@@ -45,6 +45,14 @@
     line-height: 24px;
     color: var(--secondary-placeholder-color);
     transition: var(--main-transition);
+
+    &--incoming {
+      color: var(--green-color);
+    }
+
+    &--spending {
+      color: var(--red-color);
+    }
   }
 
   &__form {
@@ -154,12 +162,4 @@
     flex-direction: column;
     gap: 40px;
   }
-}
-
-.active-type-name-incoming {
-  color: var(--green-color);
-}
-
-.active-type-name-spending {
-  color: var(--red-color);
 }

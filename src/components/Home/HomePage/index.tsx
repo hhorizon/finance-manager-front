@@ -76,8 +76,6 @@ const HomePage: React.FC = () => {
     dispatch(fetchAllTransactions(1));
   }, [dispatch, isUserloggedIn]);
 
-  process.env.NODE_ENV === "production" && console.log("production");
-
   return (
     <>
       <Header />

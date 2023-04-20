@@ -56,7 +56,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
 
   const setActiveTypeNameClass = (typeName: string) => {
     return type === typeName
-      ? `add-modal__type-name active-type-name-${typeName}`
+      ? `add-modal__type-name add-modal__type-name--${typeName}`
       : "add-modal__type-name";
   };
 
