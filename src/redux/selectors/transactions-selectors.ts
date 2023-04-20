@@ -11,3 +11,6 @@ export const statisticsSelector = (state: RootState) =>
 
 export const isTransactionsLoadingSelector = (state: RootState) =>
   state.transactions.isTransactionsLoading;
+
+export const isStatisticsLoadingLoadingSelector = (state: RootState) =>
+  state.transactions.isStatisticsLoading;

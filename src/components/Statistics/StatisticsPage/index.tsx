@@ -9,22 +9,21 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { fetchStatistics } from "../../../redux/actions/transactions-operations";
 import { statisticsSelector } from "../../../redux/selectors/transactions-selectors";
 import { userSelector } from "../../../redux/selectors/user-selectors";
-import { isUserloggedInSelector } from "../../../redux/selectors/auth-selectors";
+
 import "./styles.scss";
 
 const StatisticsPage: React.FC = () => {
   const [period, setPeriod] = useState({
-    startDate: "",
-    endDate: "",
+    startDate: "2000-01-01",
+    endDate: "2023-04-20",
   });
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
-  const isUserloggedIn = useAppSelector(isUserloggedInSelector);
   const statistics = useAppSelector(statisticsSelector);
 
   useEffect(() => {
-    isUserloggedIn && dispatch(fetchStatistics(period));
-  }, [dispatch, period, isUserloggedIn]);
+    dispatch(fetchStatistics(period));
+  }, [dispatch, period]);
 
   return (
     <>

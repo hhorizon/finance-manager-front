@@ -23,19 +23,17 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // signUp
-    builder.addCase(signUp.pending, (state, { payload }) => {
+    builder.addCase(signUp.pending, (state) => {
       state.isAuthLoading = true;
     });
-    builder.addCase(signUp.fulfilled, (state, { payload }) => {
+    builder.addCase(signUp.fulfilled, (state) => {
       state.isAuthLoading = false;
     });
-    builder.addCase(signUp.rejected, (state, { payload }) => {
+    builder.addCase(signUp.rejected, (state) => {
       state.isAuthLoading = false;
     });
 
-    // signIn
-    builder.addCase(signIn.pending, (state, { payload }) => {
+    builder.addCase(signIn.pending, (state) => {
       state.isAuthLoading = true;
     });
     builder.addCase(signIn.fulfilled, (state, { payload }) => {
@@ -43,32 +41,30 @@ const authSlice = createSlice({
       state.isUserloggedIn = true;
       state.isAuthLoading = false;
     });
-    builder.addCase(signIn.rejected, (state, { payload }) => {
+    builder.addCase(signIn.rejected, (state) => {
       state.isAuthLoading = false;
     });
 
-    // refresh current user
-    builder.addCase(refreshCurrentUser.pending, (state, { payload }) => {
+    builder.addCase(refreshCurrentUser.pending, (state) => {
       state.isAuthLoading = true;
     });
-    builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
+    builder.addCase(refreshCurrentUser.fulfilled, (state) => {
       state.isUserloggedIn = true;
       state.isAuthLoading = false;
     });
-    builder.addCase(refreshCurrentUser.rejected, (state, { payload }) => {
+    builder.addCase(refreshCurrentUser.rejected, (state) => {
       state.isAuthLoading = false;
     });
 
-    // signOut
-    builder.addCase(signOut.pending, (state, { payload }) => {
+    builder.addCase(signOut.pending, (state) => {
       state.isAuthLoading = true;
     });
-    builder.addCase(signOut.fulfilled, (state, { payload }) => {
+    builder.addCase(signOut.fulfilled, (state) => {
       state.isUserloggedIn = false;
       state.token = null;
       state.isAuthLoading = false;
     });
-    builder.addCase(signOut.rejected, (state, { payload }) => {
+    builder.addCase(signOut.rejected, (state) => {
       state.isAuthLoading = false;
     });
   },

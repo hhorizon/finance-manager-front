@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import Loader from "../Loader";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 import { useAppSelector } from "../../../redux/hooks";
-import { isAuthLoadingSelector } from "../../../redux/selectors/auth-selectors";
 import { isUserloggedInSelector } from "../../../redux/selectors/auth-selectors";
 
 interface PublicRouteProps {
@@ -12,17 +9,9 @@ interface PublicRouteProps {
 }
 
 const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
-  const navigate = useNavigate();
   const isUserloggedIn = useAppSelector(isUserloggedInSelector);
-  const isAuthLoading = useAppSelector(isAuthLoadingSelector);
 
-  useEffect(() => {
-    if (isUserloggedIn) {
-      navigate("/");
-    }
-  }, [navigate, isUserloggedIn]);
-
-  if (isAuthLoading) return <Loader />;
+  if (isUserloggedIn) return <Navigate to="/" replace={true} />;
 
   return <>{children}</>;
 };

@@ -66,15 +66,12 @@ export type StatisticsCategoriesData = {
   totalSum: number;
 };
 
-// Axios types
-// // registration
 export type RegistrationCredential = {
   email: string;
   password: string;
   name: string;
 };
 
-// // login
 export type LoginCredential = {
   email: string;
   password: string;
@@ -89,7 +86,6 @@ export type LoginResponse = {
   payload: LoginResponseData;
 };
 
-// // current
 export type RefreshCurrentResponsData = {
   user: User;
 };
@@ -98,7 +94,6 @@ export type RefreshCurrentResponse = {
   payload: RefreshCurrentResponsData;
 };
 
-// // get all transactions
 export type AllTransactions = {
   hasNextPage: boolean;
   hasPrevPage: boolean;
@@ -120,14 +115,12 @@ export type AllTransactionsResponse = {
   payload: AllTransactionsData;
 };
 
-// // add transaction
 export type AddTransactionRequestBody = Omit<Transaction, "_id" | "balance">;
 
 export type AddTransactionResponse = {
   payload: Transaction;
 };
 
-// //update transaction
 export type UpdateTransactionData = {
   transaction: Transaction;
 };
@@ -136,7 +129,6 @@ export type UpdateTransactionResponse = {
   payload: UpdateTransactionData;
 };
 
-// //delete transaction
 export type DeleteTransactionData = {
   transaction: Transaction;
 };
@@ -145,7 +137,6 @@ export type DeleteTransactionResponse = {
   payload: DeleteTransactionData;
 };
 
-// // update balance
 export type UpdateBalanceData = {
   balance: number | null;
 };
@@ -154,7 +145,6 @@ export type UpdateBalanceResponse = {
   payload: UpdateBalanceData;
 };
 
-// // get statistics
 export type Statistics = {
   incomingStatistics: StatisticsCategoriesData;
   spendingStatistics: StatisticsCategoriesData;

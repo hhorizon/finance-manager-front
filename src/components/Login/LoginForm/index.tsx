@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import Logo from "../../Unknown/Logo";
@@ -16,15 +15,10 @@ interface RegistrationFormProps {
 
 const LoginForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
 
   const initialValues: LoginFormValues = {
     email: "",
     password: "",
-  };
-
-  const toRegistrationPage = () => {
-    navigate("/registration");
   };
 
   return (
@@ -84,10 +78,6 @@ const LoginForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
         <Button variant="main" type="submit">
           Login
-        </Button>
-
-        <Button type="button" onClick={() => toRegistrationPage()}>
-          Registration
         </Button>
       </Form>
     </Formik>

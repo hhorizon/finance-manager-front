@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import Container from "../../Unknown/Container";
 import RegistrationForm from "../RegistrationForm";
+import Button from "../../Unknown/Button";
 import registretionImage from "../../../assets/img/registretion-page-img.png";
 
 import { useAppDispatch } from "../../../redux/hooks";
@@ -10,6 +12,7 @@ import { RegistrationFormValues } from "../../../types";
 import "./styles.scss";
 
 const RegistrationPage: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const onSubmit = async (values: RegistrationFormValues) => {
@@ -31,7 +34,13 @@ const RegistrationPage: React.FC = () => {
         </div>
 
         <div className="registration-page__form-wrapper">
-          <RegistrationForm onSubmit={onSubmit} />
+          <div className="registration-page__form-container">
+            <RegistrationForm onSubmit={onSubmit} />
+
+            <Button type="button" onClick={() => navigate("/")}>
+              Login
+            </Button>
+          </div>
         </div>
       </div>
     </Container>

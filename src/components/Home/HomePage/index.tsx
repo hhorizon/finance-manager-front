@@ -9,6 +9,7 @@ import AddTransactionModal from "../../Unknown/AddTransactionModal";
 import DeleteTransactionModal from "../../Unknown/InformationModal";
 import TransactionListMobile from "../TransactionListMobile";
 import TransactionListDesktop from "../TransactionListDesktop";
+import Loader from "../../Unknown/Loader";
 
 import { PlusIcon } from "../../Unknown/Icons";
 
@@ -22,6 +23,7 @@ import {
 import {
   allTransactionsSelector,
   categoriesSelector,
+  isTransactionsLoadingSelector,
 } from "../../../redux/selectors/transactions-selectors";
 import { userSelector } from "../../../redux/selectors/user-selectors";
 import { isUserloggedInSelector } from "../../../redux/selectors/auth-selectors";
@@ -36,6 +38,7 @@ const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
   const isUserloggedIn = useAppSelector(isUserloggedInSelector);
+  const isTransactionsLoading = useAppSelector(isTransactionsLoadingSelector);
   const categories = useAppSelector(categoriesSelector);
   const { transactions, totalPages, nextPage } = useAppSelector(
     allTransactionsSelector,
@@ -70,8 +73,10 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
-    isUserloggedIn && dispatch(fetchAllTransactions(1));
+    dispatch(fetchAllTransactions(1));
   }, [dispatch, isUserloggedIn]);
+
+  process.env.NODE_ENV === "production" && console.log("production");
 
   return (
     <>
@@ -83,56 +88,64 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className="home-page__trasactions-list-wrapper">
-            {isMobile ? (
-              <TransactionListMobile
-                transactions={transactions}
-                categories={categories}
-                selectedTransaction={selectedTransaction}
-                setSelectedTransaction={setSelectedTransaction}
-                onBottomScroll={fetchNextPageOnScroll}
-                onUpdate={handleUpdateTransaction}
-                onDelete={() => setShowDeleteModal(true)}
-              />
+            {isTransactionsLoading ? (
+              <div className="home-page__loader-wrapper">
+                <Loader />
+              </div>
             ) : (
-              <TransactionListDesktop
-                transactions={transactions}
-                totalPages={totalPages}
-                categories={categories}
-                selectedTransaction={selectedTransaction}
-                setSelectedTransaction={setSelectedTransaction}
-                onPaginationChange={fetchNextPageOnPaginationChange}
-                onUpdate={handleUpdateTransaction}
-                onDelete={() => setShowDeleteModal(true)}
-              />
+              <>
+                {isMobile ? (
+                  <TransactionListMobile
+                    transactions={transactions}
+                    categories={categories}
+                    selectedTransaction={selectedTransaction}
+                    setSelectedTransaction={setSelectedTransaction}
+                    onBottomScroll={fetchNextPageOnScroll}
+                    onUpdate={handleUpdateTransaction}
+                    onDelete={() => setShowDeleteModal(true)}
+                  />
+                ) : (
+                  <TransactionListDesktop
+                    transactions={transactions}
+                    totalPages={totalPages}
+                    categories={categories}
+                    selectedTransaction={selectedTransaction}
+                    setSelectedTransaction={setSelectedTransaction}
+                    onPaginationChange={fetchNextPageOnPaginationChange}
+                    onUpdate={handleUpdateTransaction}
+                    onDelete={() => setShowDeleteModal(true)}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>
+
+        {showAddModalButton && (
+          <button
+            className="add-transaction-button"
+            onClick={() => setShowAddModal(true)}
+          >
+            <PlusIcon />
+          </button>
+        )}
+
+        {showAddModal && (
+          <ModalContainer closeModal={() => setShowAddModal(false)}>
+            <AddTransactionModal closeModal={() => setShowAddModal(false)} />
+          </ModalContainer>
+        )}
+
+        {showDeleteModal && selectedTransaction && (
+          <ModalContainer closeModal={() => setShowDeleteModal(false)}>
+            <DeleteTransactionModal
+              text="Do you want to delete this transaction?"
+              closeModal={() => setShowDeleteModal(false)}
+              onSubmit={() => handleDeleteTransaction(selectedTransaction._id)}
+            />
+          </ModalContainer>
+        )}
       </Container>
-
-      {showAddModalButton && (
-        <button
-          className="add-transaction-button"
-          onClick={() => setShowAddModal(true)}
-        >
-          <PlusIcon />
-        </button>
-      )}
-
-      {showAddModal && (
-        <ModalContainer closeModal={() => setShowAddModal(false)}>
-          <AddTransactionModal closeModal={() => setShowAddModal(false)} />
-        </ModalContainer>
-      )}
-
-      {showDeleteModal && selectedTransaction && (
-        <ModalContainer closeModal={() => setShowDeleteModal(false)}>
-          <DeleteTransactionModal
-            text="Do you want to delete this transaction?"
-            closeModal={() => setShowDeleteModal(false)}
-            onSubmit={() => handleDeleteTransaction(selectedTransaction._id)}
-          />
-        </ModalContainer>
-      )}
     </>
   );
 };
