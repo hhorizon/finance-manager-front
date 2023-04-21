@@ -10,7 +10,7 @@ import {
   Transaction,
   AddTransactionRequestBody,
   CategoriesList,
-  AddFormValues,
+  AddTransactionFormValues,
 } from "../../../types";
 import "./styles.scss";
 
@@ -37,14 +37,14 @@ const ChangeTransactionFormMobile: React.FC<
 
   const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
-  const initialValues: AddFormValues = {
+  const initialValues: AddTransactionFormValues = {
     category: { name: category.name, color: category.color },
     sum,
     date: new Date(date),
     comment,
   };
 
-  const onSubmit = (values: AddFormValues) => {
+  const onSubmit = (values: AddTransactionFormValues) => {
     onUpdate(_id, {
       type,
       ...values,

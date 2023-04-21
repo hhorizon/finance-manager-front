@@ -48,7 +48,12 @@ export type LoginFormValues = {
   password: string;
 };
 
-export type AddFormValues = {
+export type AddCategoryFormValues = {
+  type: TransactionType;
+  name: string;
+};
+
+export type AddTransactionFormValues = {
   category: { name: string; color: string };
   sum: number;
   date: Date;
@@ -156,4 +161,12 @@ export type StatisticsData = {
 
 export type StatisticsResponse = {
   payload: StatisticsData;
+};
+
+export type AddCategoryData = {
+  categories: CategoriesList;
+};
+
+export type AddCategoryResponse = {
+  payload: AddCategoryData;
 };

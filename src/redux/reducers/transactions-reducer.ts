@@ -6,6 +6,7 @@ import {
   fetchNextPage,
   fetchStatistics,
 } from "../actions/transactions-operations";
+import { addCategories } from "../actions/user-operations";
 import { AllTransactions, CategoriesList, Statistics } from "../../types";
 
 type TransactionsState = {
@@ -105,6 +106,10 @@ const transactionsSlice = createSlice({
     });
     builder.addCase(fetchStatistics.rejected, (state) => {
       state.isStatisticsLoading = false;
+    });
+
+    builder.addCase(addCategories.fulfilled, (state, { payload }) => {
+      state.categories = payload.categories;
     });
   },
 });

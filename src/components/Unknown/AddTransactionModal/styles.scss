@@ -1,11 +1,5 @@
 @import "../../../styles/vars.scss";
 
-%type-name {
-  @include font(700, 16px, 24px);
-  color: $secondary-placeholder-color;
-  transition: $main-transition;
-}
-
 .add-modal {
   @extend %centered-box;
   margin: 0 -20px;
@@ -49,13 +43,15 @@
   }
 
   &__type-name {
+    @include font(700, 16px, 24px);
+    color: $secondary-placeholder-color;
+    transition: $main-transition;
+
     &--incoming {
-      @extend %type-name;
       color: $green-color;
     }
 
     &--spending {
-      @extend %type-name;
       color: $red-color;
     }
   }
@@ -97,6 +93,10 @@
       &__single-value,
       &__menu {
         color: $main-text-color !important;
+      }
+
+      &__menu {
+        padding-top: 5px !important;
       }
 
       &__value-container {
@@ -158,5 +158,21 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+  }
+}
+
+.add-category {
+  display: flex;
+  padding-bottom: 5px;
+  height: 40px;
+
+  &__button {
+    margin: 0 auto;
+    width: 100%;
+    font-family: $main-font;
+    color: $secondary-text-color;
+    background-color: $secondary-color;
+    border: none;
+    cursor: pointer;
   }
 }

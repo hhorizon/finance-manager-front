@@ -5,7 +5,7 @@ import {
   refreshCurrentUser,
   signOut,
 } from "../actions/auth-operations";
-import { updateBalance } from "../actions/user-operations";
+import { updateBalance, addCategories } from "../actions/user-operations";
 import { fetchAllTransactions } from "../actions/transactions-operations";
 import { User } from "../../types";
 
@@ -49,6 +49,16 @@ const userSlice = createSlice({
       state.isUserLoading = false;
     });
     builder.addCase(updateBalance.rejected, (state) => {
+      state.isUserLoading = false;
+    });
+
+    builder.addCase(addCategories.pending, (state) => {
+      state.isUserLoading = true;
+    });
+    builder.addCase(addCategories.fulfilled, (state) => {
+      state.isUserLoading = false;
+    });
+    builder.addCase(addCategories.rejected, (state) => {
       state.isUserLoading = false;
     });
 

@@ -2,7 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 import { createNotification } from "../../utils";
-import { UpdateBalanceResponse, UpdateBalanceData } from "../../types";
+import {
+  UpdateBalanceResponse,
+  UpdateBalanceData,
+  AddCategoryFormValues,
+  AddCategoryData,
+  AddCategoryResponse,
+} from "../../types";
 
 export const updateBalance = createAsyncThunk<UpdateBalanceData, number>(
   "user/updateBalance",
@@ -24,3 +30,23 @@ export const updateBalance = createAsyncThunk<UpdateBalanceData, number>(
     }
   },
 );
+
+export const addCategories = createAsyncThunk<
+  AddCategoryData,
+  AddCategoryFormValues
+>("user/addCategories", async (newCategory, thunkAPI) => {
+  try {
+    const { data } = await axios.patch<AddCategoryResponse>(
+      "/user/categories",
+      newCategory,
+    );
+
+    createNotification("Category added", "success", 1000);
+    return data.payload;
+  } catch (error) {
+    if (error instanceof AxiosError)
+      createNotification(error.response?.data.message, "error");
+
+    return thunkAPI.rejectWithValue(null);
+  }
+});

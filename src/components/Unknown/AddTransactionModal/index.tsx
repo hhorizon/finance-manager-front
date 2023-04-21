@@ -7,6 +7,8 @@ import "react-datetime/css/react-datetime.css";
 
 import Toggle from "../Toggle";
 import Button from "../Button";
+import ModalContainer from "../ModalContainer";
+import AddCategoryModal from "../AddCategoryModal";
 import { CloseIcon, CalendarIcon } from "../Icons";
 
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
@@ -16,7 +18,7 @@ import {
 } from "../../../redux/actions/transactions-operations";
 import { categoriesSelector } from "../../../redux/selectors/transactions-selectors";
 import { mapCategoriesForSelect } from "../../../utils";
-import { AddFormValues } from "../../../types";
+import { AddTransactionFormValues } from "../../../types";
 import "./styles.scss";
 
 interface AddTransactionModalProps {
@@ -27,19 +29,20 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
   closeModal,
 }) => {
   const [type, setType] = useState<"incoming" | "spending">("spending");
+  const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   const dispatch = useAppDispatch();
   const categories = useAppSelector(categoriesSelector);
 
   const categoriesForSelect = mapCategoriesForSelect(categories[type]);
 
-  const initialValues: AddFormValues = {
+  const initialValues: AddTransactionFormValues = {
     category: { name: "", color: "" },
     sum: 0,
     date: new Date(),
     comment: "",
   };
 
-  const onSubmit = async (values: AddFormValues) => {
+  const onSubmit = async (values: AddTransactionFormValues) => {
     await dispatch(
       addTransaction({
         type,
@@ -62,7 +65,13 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
             <p className="add-modal__title">Add transaction</p>
 
             <div className="add-modal__toggle-container">
-              <p className="add-modal__type-name--incoming">Incoming</p>
+              <p
+                className={`add-modal__type-name add-modal__type-name--${
+                  type === "incoming" && "incoming"
+                }`}
+              >
+                Incoming
+              </p>
 
               <Toggle
                 onInputChange={(checked: boolean) => {
@@ -71,7 +80,13 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
                 }}
               />
 
-              <p className="add-modal__type-name--spending">Spending</p>
+              <p
+                className={`add-modal__type-name add-modal__type-name--${
+                  type === "spending" && "spending"
+                }`}
+              >
+                Spending
+              </p>
             </div>
 
             <div className="add-modal__field">
@@ -88,6 +103,25 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
                     name: val?.label ?? "",
                     color: val?.value ?? "",
                   });
+                }}
+                components={{
+                  MenuList: ({ innerRef, innerProps, children }) => (
+                    <>
+                      <div ref={innerRef} {...innerProps}>
+                        {children}
+                      </div>
+
+                      <div className="add-category">
+                        <button
+                          type="button"
+                          className="add-category__button"
+                          onClick={() => setShowAddCategoryModal(true)}
+                        >
+                          Add your category
+                        </button>
+                      </div>
+                    </>
+                  ),
                 }}
               />
             </div>
@@ -147,6 +181,15 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
           </Form>
         )}
       </Formik>
+
+      {showAddCategoryModal && (
+        <ModalContainer closeModal={() => setShowAddCategoryModal(false)}>
+          <AddCategoryModal
+            type={type}
+            closeModal={() => setShowAddCategoryModal(false)}
+          />
+        </ModalContainer>
+      )}
     </div>
   );
 };
