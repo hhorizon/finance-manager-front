@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
 import { normalizeAmount, getPeriod, getDateOptions } from "../../../utils";
@@ -14,32 +14,17 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
   statistics,
   onChangePeriod,
 }) => {
-  const [selectedMonth, setSelectedMonth] = useState<number>();
-  const [selectedYear, setSelectedYear] = useState<number>();
+  const [selectedMonth, setSelectedMonth] = useState<string>();
+  const [selectedYear, setSelectedYear] = useState<string>();
 
   const { incomingStatistics, spendingStatistics } = statistics;
   const dateOptions = getDateOptions(2018);
 
-  const changeMonth = (month?: number) => {
-    setSelectedMonth(month);
-
-    if (!selectedYear) {
-      setSelectedYear(dateOptions.yearsOptions[0].value);
-    }
-  };
-
-  const changeYear = (year?: number) => {
-    setSelectedYear(year);
-  };
-
-  const period = useMemo(
-    () => getPeriod(selectedMonth, selectedYear),
-    [selectedMonth, selectedYear],
-  );
-
   useEffect(() => {
+    const period = getPeriod(selectedMonth, selectedYear);
+
     onChangePeriod(period);
-  }, [onChangePeriod, period]);
+  }, [onChangePeriod, selectedMonth, selectedYear]);
 
   return (
     <div className="statistics-list">
@@ -50,7 +35,7 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
           className="statistics-list__input"
           classNamePrefix="statistics-list__select"
           placeholder="Month"
-          onChange={(option) => changeMonth(option?.value)}
+          onChange={(option) => setSelectedMonth(option?.value)}
         />
 
         <Select
@@ -59,7 +44,7 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
           className="statistics-list__input"
           classNamePrefix="statistics-list__select"
           placeholder="Year"
-          onChange={(option) => changeYear(option?.value)}
+          onChange={(option) => setSelectedYear(option?.value)}
         />
       </div>
 

@@ -1,17 +1,23 @@
 import moment from "moment";
 
-const getPeriod = (selectedMonth?: number, selectedYear?: number) => {
-  let startMonth = 1;
-  let startYear = 2000;
+const getPeriod = (selectedMonth?: string, selectedYear?: string) => {
+  const currentDay = moment().format("DD");
+  const currentMonth = moment().format("MM");
+  const currentYear = moment().format("YYYY");
 
-  let endDay = moment().format("DD");
-  let endMonth = Number(moment().format("MM"));
-  let endYear = Number(moment().format("YYYY"));
+  let startDay = "01";
+  let startMonth = "01";
+  let startYear = "2000";
+
+  let endDay = currentDay;
+  let endMonth = currentMonth;
+  let endYear = currentYear;
 
   if (selectedMonth) {
+    startYear = endYear;
     startMonth = selectedMonth;
     endMonth = selectedMonth;
-    endDay = moment(`${selectedYear}-${selectedMonth}`)
+    endDay = moment(`${endYear}-${selectedMonth}`, "YYYY-MM")
       .endOf("month")
       .format("DD");
   }
@@ -22,13 +28,14 @@ const getPeriod = (selectedMonth?: number, selectedYear?: number) => {
   }
 
   if (selectedYear && !selectedMonth) {
-    endMonth = 12;
+    endMonth = "12";
     endDay = "31";
   }
 
-  const startDate = moment(`${startYear}-${startMonth}`, "YYYY MM").format(
+  const startDate = moment(
+    `${startYear}-${startMonth}-${startDay}`,
     "YYYY-MM-DD",
-  );
+  ).format("YYYY-MM-DD");
   const endDate = moment(
     `${endYear}-${endMonth}-${endDay}`,
     "YYYY-MM-DD",
