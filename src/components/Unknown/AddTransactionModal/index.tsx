@@ -50,10 +50,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
     closeModal();
   };
 
-  const handleTypeChange = (checked: boolean) => {
-    setType(checked ? "incoming" : "spending");
-  };
-
   return (
     <div className="add-modal">
       <button className="add-modal__close-btn" onClick={closeModal}>
@@ -68,21 +64,30 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
             <div className="add-modal__toggle-container">
               <p className="add-modal__type-name--incoming">Incoming</p>
 
-              <Toggle onInputChange={handleTypeChange} />
+              <Toggle
+                onInputChange={(checked: boolean) => {
+                  setFieldValue("category", initialValues.category);
+                  setType(checked ? "incoming" : "spending");
+                }}
+              />
 
               <p className="add-modal__type-name--spending">Spending</p>
             </div>
 
             <div className="add-modal__field">
               <Select
-                required
+                isClearable
+                name="category"
+                key={`${categoriesForSelect[0].label}`}
                 options={categoriesForSelect}
                 placeholder="Select category"
                 classNamePrefix="add-modal__field__select"
                 openMenuOnFocus
                 onChange={(val) => {
-                  setFieldValue("category.name", val?.label);
-                  setFieldValue("category.color", val?.value);
+                  setFieldValue("category", {
+                    name: val?.label ?? "",
+                    color: val?.value ?? "",
+                  });
                 }}
               />
             </div>

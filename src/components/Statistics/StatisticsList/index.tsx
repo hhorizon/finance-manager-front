@@ -45,6 +45,7 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
     <div className="statistics-list">
       <div className="statistics-list__input-wrapper">
         <Select
+          isClearable
           options={dateOptions.monthsOptions}
           className="statistics-list__input"
           classNamePrefix="statistics-list__select"
@@ -53,6 +54,7 @@ const StatisticsList: React.FC<StatisticsListProps> = ({
         />
 
         <Select
+          isClearable
           options={dateOptions.yearsOptions}
           className="statistics-list__input"
           classNamePrefix="statistics-list__select"
