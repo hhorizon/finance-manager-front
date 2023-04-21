@@ -12,7 +12,7 @@ const Balance: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
   const [showChangeInput, setShowChangeInput] = useState(false);
-  const [createInputValue, setCreateInputValue] = useState<number>();
+  const [createInputValue, setCreateInputValue] = useState("");
   const [changeInputValue, setChangeInputValue] = useState(user.balance);
 
   const closeChangeInput = () => {
@@ -21,7 +21,7 @@ const Balance: React.FC = () => {
   };
 
   const handleCreateBalance = () => {
-    createInputValue && dispatch(updateBalance(createInputValue));
+    dispatch(updateBalance(Number(createInputValue)));
   };
 
   const handleUpdateBalance = () => {
@@ -38,12 +38,12 @@ const Balance: React.FC = () => {
           type="number"
           step={0.5}
           value={createInputValue}
-          onChange={(e) => setCreateInputValue(Number(e.target.value))}
+          onChange={(e) => setCreateInputValue(e.target.value)}
           placeholder="Add your balance to start"
           className="balance__add__input"
         />
 
-        {createInputValue !== 0 && (
+        {createInputValue && (
           <button
             className="balance__add__button"
             onClick={handleCreateBalance}
