@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import moment from "moment";
 import Datetime from "react-datetime";
 import Select from "react-select";
@@ -18,6 +18,7 @@ import {
 } from "../../../redux/actions/transactions-operations";
 import { categoriesSelector } from "../../../redux/selectors/transactions-selectors";
 import { mapCategoriesForSelect } from "../../../utils";
+import validate from "./validation";
 import { AddTransactionFormValues } from "../../../types";
 import "./styles.scss";
 
@@ -59,8 +60,12 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
         <CloseIcon />
       </button>
 
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {({ values, setFieldValue }) => (
+      <Formik
+        initialValues={initialValues}
+        validate={validate}
+        onSubmit={onSubmit}
+      >
+        {({ values, setFieldValue, errors }) => (
           <Form className="add-modal__form">
             <p className="add-modal__title">Add transaction</p>
 
@@ -124,29 +129,47 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
                   ),
                 }}
               />
+
+              <ErrorMessage
+                name="category.name"
+                render={(errorMes) => (
+                  <p className="add-modal__field__error-message">{errorMes}</p>
+                )}
+              />
             </div>
 
             <div className="add-modal__sum-date-container">
               <div className="add-modal__field">
                 <Field
-                  required
-                  min="0.5"
                   step="0.5"
                   type="number"
                   name="sum"
                   placeholder="0.00"
                   className="add-modal__field__input"
                 />
+
+                <ErrorMessage
+                  name="sum"
+                  render={(errorMes) => (
+                    <p className="add-modal__field__error-message">
+                      {errorMes}
+                    </p>
+                  )}
+                />
               </div>
+
               <div className="add-modal__field">
-                <Field name="date">
+                <Field name="date" disabled>
                   {() => (
                     <Datetime
                       value={values.date}
                       closeOnSelect
                       timeFormat={false}
                       dateFormat="DD.MM.YYYY"
-                      inputProps={{ className: "add-modal__field__input" }}
+                      inputProps={{
+                        className: "add-modal__field__input",
+                        readOnly: true,
+                      }}
                       onChange={(date) => {
                         setFieldValue("date", date);
                       }}
@@ -158,16 +181,31 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
                 </Field>
 
                 <CalendarIcon className="add-modal__field__icon" />
+
+                <ErrorMessage
+                  name="date"
+                  render={(errorMes) => (
+                    <p className="add-modal__field__error-message">
+                      {errorMes}
+                    </p>
+                  )}
+                />
               </div>
             </div>
 
             <div className="add-modal__field">
               <Field
                 as="textarea"
-                maxLength="30"
                 name="comment"
                 placeholder="Comment"
                 className="add-modal__field__input add-modal__field__input-comment"
+              />
+
+              <ErrorMessage
+                name="comment"
+                render={(errorMes) => (
+                  <p className="add-modal__field__error-message">{errorMes}</p>
+                )}
               />
             </div>
 

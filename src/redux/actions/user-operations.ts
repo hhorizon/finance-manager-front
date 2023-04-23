@@ -41,7 +41,7 @@ export const addCategories = createAsyncThunk<
       newCategory,
     );
 
-    createNotification("Category added", "success", 1000);
+    createNotification("Category added", "success", 2000);
     return data.payload;
   } catch (error) {
     if (error instanceof AxiosError)

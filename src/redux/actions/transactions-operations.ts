@@ -56,7 +56,7 @@ export const addTransaction = createAsyncThunk<void, AddTransactionRequestBody>(
     try {
       await axios.post<AddTransactionResponse>("/transactions", body);
 
-      createNotification("Transaction added", "success", 1000);
+      createNotification("Transaction added", "success", 2000);
     } catch (error) {
       if (error instanceof AxiosError)
         createNotification(error.response?.data.message, "error");
@@ -79,7 +79,7 @@ export const updateTransaction = createAsyncThunk<
         body,
       );
 
-      createNotification("Saved", "info", 1000);
+      createNotification("Saved", "info", 2000);
     } catch (error) {
       if (error instanceof AxiosError)
         createNotification(error.response?.data.message, "error");
@@ -99,7 +99,7 @@ export const deleteTransaction = createAsyncThunk<
       `/transactions/${transactionId}`,
     );
 
-    createNotification("Transaction deleted", "info", 1000);
+    createNotification("Transaction deleted", "info", 2000);
   } catch (error) {
     if (error instanceof AxiosError)
       createNotification(error.response?.data.message, "error");
