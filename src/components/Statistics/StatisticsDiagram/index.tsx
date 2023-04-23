@@ -60,11 +60,9 @@ const StatisticsDiagram: React.FC<StatisticsDiagramProps> = ({
 
   return (
     <div className="statistics-diagram">
-      {totalBalance && (
-        <p className="statistics-diagram__balance">
-          {normalizeAmount(totalBalance)}
-        </p>
-      )}
+      <p className="statistics-diagram__balance">
+        {normalizeAmount(totalBalance ?? 0)}
+      </p>
 
       <Doughnut
         data={categories.length === 0 ? emptyData : data}

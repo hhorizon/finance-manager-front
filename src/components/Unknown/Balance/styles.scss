@@ -5,7 +5,7 @@
   padding: 10px 40px;
   background-color: $white-background-color;
   border-radius: 30px;
-  z-index: 1;
+  z-index: 2;
 
   &__container {
     width: 100%;
@@ -61,6 +61,7 @@
       width: 100%;
       height: 100%;
       background: $third-shadow-color;
+      z-index: 1;
     }
   }
 

@@ -14,8 +14,8 @@ import "./styles.scss";
 
 const StatisticsPage: React.FC = () => {
   const [period, setPeriod] = useState({
-    startDate: "2000-01-01",
-    endDate: "2023-04-20",
+    startDate: "",
+    endDate: "",
   });
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);

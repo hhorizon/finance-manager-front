@@ -172,7 +172,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
             </div>
 
             <Button type="submit" variant="main">
-              Submit
+              Add
             </Button>
 
             <Button type="button" onClick={closeModal}>
