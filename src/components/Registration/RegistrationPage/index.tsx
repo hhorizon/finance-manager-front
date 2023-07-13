@@ -17,7 +17,8 @@ const RegistrationPage: React.FC = () => {
 
   const onSubmit = async (values: RegistrationFormValues) => {
     const { email, password, name } = values;
-    dispatch(signUp({ email, password, name }));
+    const { meta } = await dispatch(signUp({ email, password, name }));
+    if (meta.requestStatus === "fulfilled") navigate("/login");
   };
 
   return (
